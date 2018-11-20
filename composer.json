@@ -15,7 +15,7 @@
   },
   "require-dev": {},
   "bin": [
-    "bin/llms-tests",
+    "bin/llms-tests"
   ],
   "scripts": {
     "tests-install": [
