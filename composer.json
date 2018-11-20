@@ -1,0 +1,27 @@
+{
+  "name": "lifterlms/lifterlms-tests",
+  "description": "Testing framework for LifterLMS projects",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Team LifterLMS",
+      "email": "help@lifterlms.com"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "^6",
+    "wp-cli/extension-command": "^2.0"
+  },
+  "require-dev": {},
+  "bin": [
+    "bin/llms-tests",
+  ],
+  "scripts": {
+    "tests-install": [
+      "vendor/bin/llms-tests teardown llms_blocks_tests root password localhost",
+      "vendor/bin/llms-tests install llms_blocks_tests root password localhost"
+      "vendor/bin/llms-tests plugin lifterlms"
+    ]
+  }
+}
