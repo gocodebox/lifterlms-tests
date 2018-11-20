@@ -10,8 +10,7 @@
     }
   ],
   "require": {
-    "phpunit/phpunit": "^6",
-    "wp-cli/extension-command": "^2.0"
+    "phpunit/phpunit": "^6"
   },
   "require-dev": {},
   "bin": [
