@@ -10,6 +10,12 @@ LifterLMS Tests is a project to help bootstrap automated testsing in LifterLMS p
 + Create a bootstrap file in the `tests` directory, see [example](examples/bootstrap.php)
 + Add test classes in `tests/unit-tests`
 
+## Commands
+
++ Install Testing Suite: `./vendor/bin/llms-tests install <db-name> <db-user> <db-pass> [db-host] [wp-version] [skip-database-creation]`
++ Teardown Testing Suite: `.vendor/bin/llms-tests teardown <db-name> <db-user> <db-pass> [db-host]`
++ Install a Plugin: `./vendor/bin/llms-tests <slug_or_zip> [version]` 
+
 ## Predefined scripts
 
 The following scripts can be added to your `composer.json` file for easy access to thes scripts & to ensure configurations are automatically set during package installation and updates.
@@ -17,8 +23,9 @@ The following scripts can be added to your `composer.json` file for easy access 
 ```json
 "scripts": {
     "tests-install": [
-      "vendor/bin/llms-tests-teardown llms_tests root password localhost",
-      "vendor/bin/llms-tests-install llms_tests root password localhost nightly"
+      "vendor/bin/llms-tests teardown llms_tests root password localhost",
+      "vendor/bin/llms-tests install llms_tests root password localhost",
+      "vendor/bin/llms-tests plugin lifterlms"
     ],
     "tests-run": [
       "vendor/bin/phpunit"
