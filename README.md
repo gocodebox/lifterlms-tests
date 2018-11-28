@@ -3,6 +3,10 @@ LifterLMS Tests
 
 LifterLMS Tests is a project to help bootstrap automated testsing in LifterLMS projects.
 
+## Installation
+
+`composer install --dev lifterlms/lifterlms-tests`
+
 ## Predefined scripts
 
 The following scripts can be added to your `composer.json` file for easy access to thes scripts & to ensure configurations are automatically set during package installation and updates.
