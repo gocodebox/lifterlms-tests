@@ -14,8 +14,8 @@ The following scripts can be added to your `composer.json` file for easy access 
 ```json
 "scripts": {
     "tests-install": [
-      "vendor/bin/llms-tests-teardown llms_blocks_tests root password localhost",
-      "vendor/bin/llms-tests-install llms_blocks_tests root password localhost nightly"
+      "vendor/bin/llms-tests-teardown llms_tests root password localhost",
+      "vendor/bin/llms-tests-install llms_tests root password localhost nightly"
     ],
     "tests-run": [
       "vendor/bin/phpunit"
