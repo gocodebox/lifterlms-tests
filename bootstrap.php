@@ -76,12 +76,6 @@ class LLMS_Tests_Bootstrap {
 		// Load the WP testing environment.
 		require_once( $this->wp_tests_dir . '/includes/bootstrap.php' );
 
-		// Activate LifterLMS Core (if it exists)
-		if ( $this->use_core && file_exists( WP_PLUGIN_DIR . '/lifterlms' ) ) {
-			define( 'LLMS_USE_PHP_SESSIONS', true );
-			activate_plugin( WP_PLUGIN_DIR . '/lifterlms/lifterlms.php' );
-		}
-
 		// Load any includes.
 		$this->includes();
 
@@ -132,8 +126,31 @@ class LLMS_Tests_Bootstrap {
 	 */
 	public function load() {
 
+		if ( $this->use_core ) {
+			define( 'LLMS_USE_PHP_SESSIONS', true );
+			define( 'LLMS_PLUGIN_DIR', WP_PLUGIN_DIR . '/lifterlms/' );
+			$this->load_plugin( 'lifterlms', 'lifterlms.php' );
+		}
+
 		if ( $this->plugin_main ) {
 			require_once( $this->plugin_dir . '/' . $this->plugin_main );
+		}
+
+	}
+
+	/**
+	 * Load a plugin dependency
+	 *
+	 * @param   string    $dir  directory name for the plugin (eg lifterlms).
+	 * @param   string    $file filename for the plugin (eg: lifterlms.php).
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function load_plugin( $dir, $file ) {
+
+		if ( file_exists( WP_PLUGIN_DIR . '/' . $dir ) ) {
+			require_once( WP_PLUGIN_DIR . '/' . $dir . '/' . $file );
 		}
 
 	}
