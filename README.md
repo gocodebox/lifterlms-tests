@@ -5,7 +5,7 @@ LifterLMS Tests is a project to help bootstrap automated testsing in LifterLMS p
 
 ## Installation
 
-+ Install package: `composer install --dev lifterlms/lifterlms-tests`
++ Install package: `composer require --dev lifterlms/lifterlms-tests`
 + Create a `phpunit.xml.dist` file. See [example](examples/phpunit.xml.dist).
 + Add a `tests` direcotry: `mkdir tests`
 + Create a bootstrap file in the `tests` directory. see [example](examples/bootstrap.php).
