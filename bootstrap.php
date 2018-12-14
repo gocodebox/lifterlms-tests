@@ -45,8 +45,8 @@ class LLMS_Tests_Bootstrap {
 
 	/**
 	 * Constructor
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.1.0
 	 */
 	public function __construct() {
 
@@ -72,6 +72,7 @@ class LLMS_Tests_Bootstrap {
 
 		// Install the plugin.
 		tests_add_filter( 'setup_theme', array( $this, 'install' ) );
+		tests_add_filter( 'setup_theme', array( $this, 'install_after' ) );
 
 		// Load the WP testing environment.
 		require_once( $this->wp_tests_dir . '/includes/bootstrap.php' );
@@ -84,8 +85,8 @@ class LLMS_Tests_Bootstrap {
 	/**
 	 * Load test suite files/includes
 	 * @return   void
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	public function includes() {
 
@@ -107,8 +108,8 @@ class LLMS_Tests_Bootstrap {
 	/**
 	 * Install the plugin
 	 * @return   void
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.1.0
 	 */
 	public function install() {
 
@@ -116,13 +117,32 @@ class LLMS_Tests_Bootstrap {
 
 		echo 'Installing '. $this->suite_name .'...' . PHP_EOL;
 
+		if ( $this->use_core ) {
+			LLMS_Install::install();
+		}
+
+	}
+
+	/**
+	 * Runs immediately after $this->install()
+	 *
+	 * @return  void
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 */
+	public function install_after() {
+
+		// Reload capabilities after install, see https://core.trac.wordpress.org/ticket/28374.
+		$GLOBALS['wp_roles'] = null;
+		wp_roles();
+
 	}
 
 	/**
 	 * Load the plugin
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function load() {
 
@@ -144,8 +164,8 @@ class LLMS_Tests_Bootstrap {
 	 * @param   string    $dir  directory name for the plugin (eg lifterlms).
 	 * @param   string    $file filename for the plugin (eg: lifterlms.php).
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function load_plugin( $dir, $file ) {
 
@@ -158,20 +178,25 @@ class LLMS_Tests_Bootstrap {
 	/**
 	 * Uninstall the plugin.
 	 * @return  [type]
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function uninstall() {
 
+		echo 'Removing '. $this->suite_name .'...' . PHP_EOL;
+
+		define( 'WP_UNINSTALL_PLUGIN', true );
+
+		if ( $this->use_core ) {
+			define( 'LLMS_REMOVE_ALL_DATA', true );
+			include( WP_PLUGIN_DIR . '/lifterlms/uninstall.php' );
+		}
+
 		// Clean existing install first.
 		if ( file_exists( $this->plugin_dir . '/uninstall.php' ) ) {
-
-			echo 'Removing '. $this->suite_name .'...' . PHP_EOL;
-
-			define( 'WP_UNINSTALL_PLUGIN', true );
 			require_once $this->plugin_dir . '/uninstall.php';
-
 		}
+
 
 	}
 
