@@ -66,6 +66,7 @@ class LLMS_Tests_Bootstrap {
 
 		// load test function so tests_add_filter() is available
 		require_once $this->wp_tests_dir . '/includes/functions.php';
+		require_once dirname( __FILE__ ) . '/framework/functions-llms-tests.php';
 
 		// Load the plugin.
 		tests_add_filter( 'muplugins_loaded', array( $this, 'load' ) );

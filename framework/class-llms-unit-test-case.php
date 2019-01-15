@@ -7,8 +7,9 @@ class LLMS_Unit_Test_Case extends WP_UnitTestCase {
 	/**
 	 * Setup the test case.
 	 *
-	 * @since   [version]
-	 * @version [version]
+	 * @return  void
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function setUp() {
 
@@ -18,12 +19,26 @@ class LLMS_Unit_Test_Case extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Teardown the test.
+	 *
+	 * @return  void
+	 * @since   1.2.0
+	 * @version 1.2.0
+	 */
+	public function tearDown() {
+
+		parent::tearDown();
+		llms_tests_reset_current_time();
+
+	}
+
+	/**
 	 * Setup Get data to mock post and request data
 	 *
 	 * @param    array      $vars  mock get data
 	 * @return   void
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	protected function mockGetRequest( $vars = array() ) {
 		$this->mockRequest( 'GET', $vars );
@@ -34,8 +49,8 @@ class LLMS_Unit_Test_Case extends WP_UnitTestCase {
 	 *
 	 * @param    array      $vars  mock post data
 	 * @return   void
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	protected function mockPostRequest( $vars = array() ) {
 		$this->mockRequest( 'POST', $vars );
@@ -46,8 +61,8 @@ class LLMS_Unit_Test_Case extends WP_UnitTestCase {
 	 *
 	 * @param    array      $vars  mock request data
 	 * @return   void
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	private function mockRequest( $method, $vars = array() ) {
 		putenv( 'REQUEST_METHOD=' . $method );
