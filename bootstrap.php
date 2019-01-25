@@ -46,7 +46,7 @@ class LLMS_Tests_Bootstrap {
 	/**
 	 * Constructor
 	 * @since    1.0.0
-	 * @version  1.1.0
+	 * @version  1.2.0
 	 */
 	public function __construct() {
 
@@ -66,7 +66,13 @@ class LLMS_Tests_Bootstrap {
 
 		// load test function so tests_add_filter() is available
 		require_once $this->wp_tests_dir . '/includes/functions.php';
+
+		// Include llms-tests lib functions.
 		require_once dirname( __FILE__ ) . '/framework/functions-llms-tests.php';
+		// Include add-on tests functions (if they exist).
+		if ( file_exists( $this->tests_dir . '/framework/functions-llms-tests.php' ) ) {
+			require_once $this->tests_dir . '/framework/functions-llms-tests.php';
+		}
 
 		// Load the plugin.
 		tests_add_filter( 'muplugins_loaded', array( $this, 'load' ) );
@@ -87,17 +93,26 @@ class LLMS_Tests_Bootstrap {
 	 * Load test suite files/includes
 	 * @return   void
 	 * @since    1.0.0
-	 * @version  1.0.0
+	 * @version  1.2.0
 	 */
 	public function includes() {
 
+		// Framework files included with llms-tests.
 		$files = array_merge(
 			glob( dirname( __FILE__ ) . '/framework/*.php' ),
 			glob( dirname( __FILE__ ) . '/framework/factory/*.php' )
 		);
 
+		// Framework files from the add-on.
 		if ( file_exists( $this->tests_dir . '/framework' ) ) {
+
+			// Top level files in the framework dir.
 			$files = array_merge( $files, glob( $this->tests_dir . '/framework/*.php' ) );
+
+			foreach ( glob( $this->tests_dir . '/framework/**', GLOB_ONLYDIR ) as $dir ) {
+				$files = array_merge( $files, glob( $dir . '/*.php' ) );
+			}
+
 		}
 
 		foreach ( $files as $file ) {
@@ -178,7 +193,7 @@ class LLMS_Tests_Bootstrap {
 
 	/**
 	 * Uninstall the plugin.
-	 * @return  [type]
+	 * @return  void
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 */
