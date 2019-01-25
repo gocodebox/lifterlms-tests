@@ -33,7 +33,7 @@ function llms_current_time( $type, $gmt = 0 ) {
  */
 function llms_tests_mock_current_time( $time ) {
 	global $llms_tests_mock_time;
-	$llms_tests_mock_time = strtotime( $time );
+	$llms_tests_mock_time = is_numeric( $time ) ? $time : strtotime( $time );
 }
 
 /**
