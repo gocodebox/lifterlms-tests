@@ -55,6 +55,12 @@ $result = LLMS_Unit_Test_Util::get_private_method( new MyClass(), 'my_private_me
 $this->assertTrue( $result );
 ```
 
+## Functions
+
+Mock the return of `llms_current_time()` by using `llms_tests_mock_current_time( $timestamp_or_date )`
+
+Reset the current time with `llms_tests_reset_current_time()`
+
 
 ## Factories
 
