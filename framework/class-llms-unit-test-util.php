@@ -13,7 +13,7 @@ class LLMS_Unit_Test_Util {
 	 */
 	public static function call_method( $obj, $name, array $args = array() ) {
 
-		$method = self::getPrivateMethod( $obj, $name );
+		$method = self::get_private_method( $obj, $name );
 		return $method->invokeArgs( $obj, $args );
 
 	}
