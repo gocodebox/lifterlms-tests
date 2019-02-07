@@ -51,7 +51,7 @@ $method = LLMS_Unit_Test_Util::get_protected_method( new MyClass(), 'my_private_
 Call a private/protected class method for testing:
 
 ```php
-$result = LLMS_Unit_Test_Util::get_private_method( new MyClass(), 'my_private_method', array( 'argument_1', 'arg_2', ... ) );
+$result = LLMS_Unit_Test_Util::call_method( new MyClass(), 'my_private_method', array( 'argument_1', 'arg_2', ... ) );
 $this->assertTrue( $result );
 ```
 
