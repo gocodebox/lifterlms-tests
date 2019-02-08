@@ -11,6 +11,10 @@ LifterLMS Tests is a project to help bootstrap automated testsing in LifterLMS p
 + Create a bootstrap file in the `tests` directory. see [example](examples/bootstrap.php).
 + Add test classes in `tests/unit-tests`
 
+## Assertions
+
+`assertWPErrorCodeEquals`
+`assertWPError`
 
 ## Commands
 

@@ -33,6 +33,35 @@ class LLMS_Unit_Test_Case extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Assert that a give object is a WP_Error
+	 *
+	 * @param   obj    $wp_err WP_Error.
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function assertIsWPError( $wp_err ) {
+
+		$this->assertTrue( is_a( $wp_err, 'WP_Error' ) );
+
+	}
+
+	/**
+	 * Arrest that a given object has an expected WP_Error code.
+	 *
+	 * @param   string    $expected expected error code
+	 * @param   obj    $wp_err WP_Error.
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function assertWPErrorCodeEquals( $expected, $wp_err ) {
+
+		$this->assertEquals( $expected, $wp_err->get_error_code() ) ;
+
+	}
+
+	/**
 	 * Setup Get data to mock post and request data
 	 *
 	 * @param    array      $vars  mock get data
