@@ -66,6 +66,17 @@ Mock the return of `llms_current_time()` by using `llms_tests_mock_current_time(
 Reset the current time with `llms_tests_reset_current_time()`
 
 
+## Test Case Methods
+
+Test cases which extend the `LLMS_Unit_Test_Case` class may access utility functiosn built into the test case class.
+
+##### Mock `$_GET`, `$_POST`, and `$_REQUEST` data
+
+Add mock `$_GET` data via `$this->mockGetRequest( array( 'var' => 'value' ) );`
+
+Add mock `$_POST` data via `$this->mockPostRequest( array( 'var' => 'value' ) );`
+
+
 ## Factories
 
 Test cases which extend the `LLMS_Unit_Test_Case` class may access factories built off the WP Unit Tests Factories: `WP_UnitTest_Factory_For_Post` and `WP_UnitTest_Factory_For_User`

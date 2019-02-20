@@ -46,3 +46,54 @@ function llms_tests_reset_current_time() {
 	global $llms_tests_mock_time;
 	$llms_tests_mock_time = null;
 }
+
+/**
+ * Plug core `llms_filter_input` to allow data to be mocked via the mock request test case methods.
+ *
+ * @param   int    $type           One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+ * @param   string $variable_name  Name of a variable to get.
+ * @param   int    $filter         The ID of the filter to apply.
+ * @param   mixed  $options        Associative array of options or bitwise disjunction of flags. If filter accepts options, flags can be provided in "flags" field of array.
+ * @return  Value of the requested variable on success, FALSE if the filter fails, or NULL if the variable_name variable is not set. If the flag FILTER_NULL_ON_FAILURE is used, it returns FALSE if the variable is not set and NULL if the filter fails.
+ * @since   [version]
+ * @version [version]
+ */
+function llms_filter_input( $type, $variable_name, $filter = FILTER_DEFAULT, $options = array() ) {
+
+	// Get the raw data.
+	switch( $type ) {
+
+		case INPUT_POST:
+			$data = $_POST;
+			break;
+
+		case INPUT_GET:
+			$data = $_GET;
+			break;
+
+		case INPUT_SERVER:
+			$data = $_SERVER;
+			break;
+
+		case INPUT_ENV:
+			$data = $_ENV;
+			break;
+
+		case INPUT_COOKIE:
+			$data = $_COOKIE;
+			break;
+
+		default:
+			$data = array();
+
+	}
+
+	if ( isset( $data[ $variable_name ] ) ) {
+
+		return filter_var( $data[ $variable_name ], $filter, $options );
+
+	}
+
+	return null;
+
+}
