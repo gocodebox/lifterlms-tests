@@ -1,6 +1,13 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.3.0 - 2019-03-12
+-------------------
+
++ Added output assertion unit test case methods.
++ Separated unit test methods into traits.
+
+
 v1.2.0 - 2019-01-25
 -------------------
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Tests Bootstrap
+ *
+ * @since    1.0.0
+ * @version  1.3.0
+ */
 class LLMS_Tests_Bootstrap {
 
 	/**
@@ -93,12 +99,13 @@ class LLMS_Tests_Bootstrap {
 	 * Load test suite files/includes
 	 * @return   void
 	 * @since    1.0.0
-	 * @version  1.2.0
+	 * @version  1.3.0
 	 */
 	public function includes() {
 
 		// Framework files included with llms-tests.
 		$files = array_merge(
+			glob( dirname( __FILE__ ) . '/framework/traits/*.php' ),
 			glob( dirname( __FILE__ ) . '/framework/*.php' ),
 			glob( dirname( __FILE__ ) . '/framework/factory/*.php' )
 		);

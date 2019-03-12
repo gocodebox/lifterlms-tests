@@ -11,11 +11,6 @@ LifterLMS Tests is a project to help bootstrap automated testsing in LifterLMS p
 + Create a bootstrap file in the `tests` directory. see [example](examples/bootstrap.php).
 + Add test classes in `tests/unit-tests`
 
-## Assertions
-
-`assertWPErrorCodeEquals`
-`assertWPError`
-
 ## Commands
 
 + Install Testing Suite: `./vendor/bin/llms-tests install <db-name> <db-user> <db-pass> [db-host] [wp-version] [skip-database-creation]`
@@ -70,12 +65,31 @@ Reset the current time with `llms_tests_reset_current_time()`
 
 Test cases which extend the `LLMS_Unit_Test_Case` class may access utility functiosn built into the test case class.
 
+##### Assertions
+
+Test cases which extend the `LLMS_Unit_Test_Case` class may access utility functiosn built into the test case class.
+
+###### Output Buffering
+
++ Assert the output of a function contains a string: `$this->assertOutputContains( $contains, $callable, $args_array );`
++ Assert the output of a function does not contain a string: `$this->assertOutputNotContains( $contains, $callable, $args_array );`
++ Assert the output of a function is empty: `$this->assertOutputEmpty( $callable, $args_array );`
++ Assert the output of a function equals an expectation: `$this->assertOutputEquals( $expected, $callable, $args_array );`
+
+###### `WP_Error`
+
++ Assert a `WP_Error` code equals an expectation: `$this->assertWPErrorCodeEquals( $code, $wp_err );`
++ Assert an object is a `WP_Error`:  `$this->assertWPError( $wp_err );`
+
 ##### Mock `$_GET`, `$_POST`, and `$_REQUEST` data
 
 Add mock `$_GET` data via `$this->mockGetRequest( array( 'var' => 'value' ) );`
 
 Add mock `$_POST` data via `$this->mockPostRequest( array( 'var' => 'value' ) );`
 
+##### Utility Methods
+
++ Get the output of a function: `$output = $this->get_output( $callable, $args_array );`
 
 ## Factories
 
