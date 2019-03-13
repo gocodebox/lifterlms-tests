@@ -129,6 +129,19 @@ Create a membership and retrieve LLMS_Membership object: `$membership = $this->f
 Create a many memberships: `$memberships = $this->factory->membership->create_many( 5 );`
 
 
+##### Order Post Factory
+
+Access the factory: `$this->factory->order`
+
+Create an order and retrieve the order ID: `$order_id = $this->factory->order->create();`
+
+Create an order and retrieve LLMS_Order object: `$order = $this->factory->order->create_and_get();`
+
+Create a many orders: `$orders = $this->factory->order->create_many( 5 );`
+
+Create an order and record a transaction for it LLMS_Order: `$order = $this->factory->order->create_and_pay();`
+
+
 ##### Student User Factory
 
 Access the factory: `$this->factory->student`

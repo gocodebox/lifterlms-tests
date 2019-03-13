@@ -25,6 +25,14 @@ class LLMS_Unit_Test_Factory extends WP_UnitTest_Factory {
 	 */
 	public $membership;
 
+
+	/**
+	 * LLMS_Unit_Test_Factory_For_Order
+	 *
+	 * @var obj
+	 */
+	public $order;
+
 	/**
 	 * LLMS_Unit_Test_Factory_For_Student
 	 *
@@ -43,6 +51,9 @@ class LLMS_Unit_Test_Factory extends WP_UnitTest_Factory {
 		$this->instructor = new LLMS_Unit_Test_Factory_For_Instructor( $this );
 		$this->membership = new LLMS_Unit_Test_Factory_For_Membership( $this );
 		$this->student = new LLMS_Unit_Test_Factory_For_Student( $this );
+
+		// Uses $this->student.
+		$this->order = new LLMS_Unit_Test_Factory_For_Order( $this );
 
 	}
 
