@@ -10,7 +10,7 @@ class LLMS_Unit_Test_Factory_For_Order extends WP_UnitTest_Factory_For_Post {
 			'customer' => '', // can pass an array of customer data, customer id, or empty to automatically generate a customer.
 			'plan_id' => '', // plan ID
 			'plan_price' => 99.99,
-			'prouduct_id' => '', // If no plan this product will be used for the auto-generated plan
+			'product_id' => '', // If no plan this product will be used for the auto-generated plan
 			'agree_to_terms' => 'yes',
 			'payment_gateway' => 'manual',
 		);
@@ -65,12 +65,12 @@ class LLMS_Unit_Test_Factory_For_Order extends WP_UnitTest_Factory_For_Post {
 		return llms_get_post( $post_id );
 	}
 
-	public function create_and_pay( $args ) {
+	public function create_and_pay( $args = array() ) {
 
 		$order = $this->create_and_get( $args );
 
 		$order->record_transaction( array(
-			'amount' => $args['plan_price'],
+			'amount' => $order->get( 'total' ),
 		) );
 
 		return $order;

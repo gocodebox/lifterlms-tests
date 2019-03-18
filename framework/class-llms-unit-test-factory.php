@@ -52,7 +52,7 @@ class LLMS_Unit_Test_Factory extends WP_UnitTest_Factory {
 		$this->membership = new LLMS_Unit_Test_Factory_For_Membership( $this );
 		$this->student = new LLMS_Unit_Test_Factory_For_Student( $this );
 
-		// Uses $this->student.
+		// Uses $this->student & $this->course
 		$this->order = new LLMS_Unit_Test_Factory_For_Order( $this );
 
 	}
