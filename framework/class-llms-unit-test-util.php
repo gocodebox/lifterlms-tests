@@ -4,6 +4,12 @@
  */
 class LLMS_Unit_Test_Util {
 
+	private static function get_class( $obj ) {
+
+		return new ReflectionClass( $obj );
+
+	}
+
 	/**
 	 * Call a method (private or protected)
 	 * @param   obj $obj Instantiated class instance
@@ -38,10 +44,26 @@ class LLMS_Unit_Test_Util {
 	 */
 	public static function get_private_method( $obj, $name ) {
 
-		$class = new ReflectionClass( $obj );
+		$class = self::get_class( $obj );
 		$method = $class->getMethod( $name );
 		$method->setAccessible( true );
 		return $method;
+
+	}
+
+	public static function get_private_property( $obj, $name ) {
+
+		$class = self::get_class( $obj );
+		$prop = $class->getProperty( $name );
+		return $prop;
+
+	}
+
+	public static function set_private_property( $obj, $name, $val ) {
+
+		$prop = self::get_private_property( $obj, $name );
+		$prop->setAccessible( true );
+		$prop->setValue( $obj, $val );
 
 	}
 
