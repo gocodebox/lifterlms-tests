@@ -91,6 +91,50 @@ Add mock `$_POST` data via `$this->mockPostRequest( array( 'var' => 'value' ) );
 
 + Get the output of a function: `$output = $this->get_output( $callable, $args_array );`
 
+## Exceptions
+
+Included exceptions allow easy testing of methods which call `exit()` and `llms_redirect_and_exit()`.
+
+##### LLMS_Unit_Test_Exception_Exit
+
+Test methods which call `exit()`: Call `$this->expectException( LLMS_Unit_Test_Exception_Exit::class );` before calling the function that calls exit.
+
+```php
+public function test_example_exit() {
+  $this->expectException( LLMS_Unit_Test_Exception_Exit::class );
+  example_function_that_exits();
+}
+```
+
+##### LLMS_Unit_Test_Exception_Redirect
+
+Test methods which call `llms_redirect_and_exit()`:
+
+```php
+public function test_my_redirect_and_exit() {
+  $this->expectException( LLMS_Unit_Test_Exception_Redirect::class );
+  $this->expectExceptionMessage( 'https://lifterlms.com [302] YES' );
+  llms_redirect_and_exit( 'https://lifterlms.com' );
+}
+```
+
+The exceptions will cause PHP execution to cease. To run additional tests after the exception is encountered add a try/catch block:
+
+```php
+public function test_my_redirect_and_exit() {
+  $this->expectException( LLMS_Unit_Test_Exception_Redirect::class );
+  $this->expectExceptionMessage( 'https://lifterlms.com [302] YES' );
+  try {
+    llms_redirect_and_exit( 'https://lifterlms.com' );
+  } catch( LLMS_Unit_Test_Exception_Redirect $exception ) {
+    // Any additional assertions can be added here.
+    $this->assertTrue( ... );
+    throw $exception;
+  }
+}
+```
+
+
 ## Factories
 
 Test cases which extend the `LLMS_Unit_Test_Case` class may access factories built off the WP Unit Tests Factories: `WP_UnitTest_Factory_For_Post` and `WP_UnitTest_Factory_For_User`

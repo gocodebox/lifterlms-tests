@@ -99,7 +99,7 @@ class LLMS_Tests_Bootstrap {
 	 * Load test suite files/includes
 	 * @return   void
 	 * @since    1.0.0
-	 * @version  1.3.0
+	 * @version  1.4.0
 	 */
 	public function includes() {
 
@@ -107,6 +107,7 @@ class LLMS_Tests_Bootstrap {
 		$files = array_merge(
 			glob( dirname( __FILE__ ) . '/framework/traits/*.php' ),
 			glob( dirname( __FILE__ ) . '/framework/*.php' ),
+			glob( dirname( __FILE__ ) . '/framework/exceptions/*.php' ),
 			glob( dirname( __FILE__ ) . '/framework/factory/*.php' )
 		);
 

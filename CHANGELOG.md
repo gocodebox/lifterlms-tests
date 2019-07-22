@@ -19,3 +19,8 @@ v1.2.0 - 2019-01-25
 
 + Load add-on framework functions early with core framework functions
 + Recursively load framework functions from subdirectories
+
+v1.3.0 - 2019-07-22
+-------------------
+
++ Added exception test cases.
