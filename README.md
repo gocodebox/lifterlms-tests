@@ -15,7 +15,7 @@ LifterLMS Tests is a project to help bootstrap automated testsing in LifterLMS p
 
 + Install Testing Suite: `./vendor/bin/llms-tests install <db-name> <db-user> <db-pass> [db-host] [wp-version] [skip-database-creation]`
 + Teardown Testing Suite: `.vendor/bin/llms-tests teardown <db-name> <db-user> <db-pass> [db-host]`
-+ Install a Plugin: `./vendor/bin/llms-tests plugin <slug_or_zip> [version]`
++ Install a Plugin: `./vendor/bin/llms-tests plugin <slug_or_zip_giturl> [version]`
 + Run tests: `./vendor/bin/phpunit`
 
 

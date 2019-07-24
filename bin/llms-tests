@@ -227,7 +227,7 @@ function run {
 	elif [ $COMMAND == "plugin" ]; then
 
 		if [ $# -lt 2 ]; then
-			echo "Usage: $0 $COMMAND <slug_or_zip> [version]"
+			echo "Usage: $0 $COMMAND <slug_or_zip_or_git> [version]"
 			exit 1
 		fi
 
@@ -235,7 +235,8 @@ function run {
 		VERSION=${3-latest}
 		ZIP=""
 
-		if [ -1 == $(strindex "$SLUG_OR_ZIP" ".zip") ]; then
+		# Download plugin from WordPress.org.
+		if [ -1 == $(strindex "$SLUG_OR_ZIP" ".zip") ] && [ -1 == $(strindex "$SLUG_OR_ZIP" ".git") ]; then
 
 			if [ "latest" == $VERSION ]; then
 				# download  $TMPDIR/${SLUG_OR_ZIP}-plugin-info.json
@@ -247,6 +248,23 @@ function run {
 			download https://downloads.wordpress.org/plugin/${SLUG_OR_ZIP}.${VERSION}.zip $TMPDIR/${SLUG_OR_ZIP}.zip
 			ZIP=$TMPDIR/${SLUG_OR_ZIP}.zip
 
+		# Clone from a git repo.
+		elif [ -1 != $(strindex "$SLUG_OR_ZIP" ".git") ]; then
+
+			SLUG=$(basename ${SLUG_OR_ZIP} .${SLUG_OR_ZIP##*.})
+			PLUGIN_DIR=$WP_CORE_DIR/wp-content/plugins/$SLUG
+			rm -rf $PLUGIN_DIR
+			git clone $SLUG_OR_ZIP $PLUGIN_DIR
+
+			# if the plugin has a composer.json file, install deps.
+			if [ -f $PLUGIN_DIR/composer.json ]; then
+				CWD=$(pwd)
+				cd $PLUGIN_DIR
+				composer install --no-dev
+				cd $CWD
+			fi
+
+		# Download from an arbitrary url.
 		else
 
 			download ${SLUG_OR_ZIP} $TMPDIR/${SLUG_OR_ZIP}
@@ -254,8 +272,11 @@ function run {
 
 		fi
 
-		echo $ZIP
-		unzip -q $ZIP -d $WP_CORE_DIR/wp-content/plugins/
+		# If we have a zip file unzip it.
+		if [ ! -z $ZIP ]; then
+			echo $ZIP
+			unzip -q $ZIP -d $WP_CORE_DIR/wp-content/plugins/
+		fi
 
 	else
 
