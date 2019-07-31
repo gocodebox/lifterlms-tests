@@ -1,7 +1,7 @@
 LifterLMS Tests
 ===============
 
-LifterLMS Tests is a project to help bootstrap automated testsing in LifterLMS projects.
+LifterLMS Tests is a project to help bootstrap automated testing in LifterLMS projects.
 
 ## Installation
 
