@@ -24,3 +24,9 @@ v1.3.0 - 2019-07-22
 -------------------
 
 + Added exception test cases.
+
+
+v1.4.0 - 2019-08-09
+-------------------
+
++ Added additional WP_Error assertions.

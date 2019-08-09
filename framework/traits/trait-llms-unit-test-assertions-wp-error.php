@@ -3,7 +3,7 @@
  * Assertions related to checking for WP_Error things
  *
  * @since    1.3.0
- * @version  1.3.0
+ * @version  1.4.0
  */
 trait LLMS_Unit_Test_Assertions_WP_Error {
 
@@ -32,7 +32,37 @@ trait LLMS_Unit_Test_Assertions_WP_Error {
 	 */
 	public function assertWPErrorCodeEquals( $expected, $wp_err ) {
 
-		$this->assertEquals( $expected, $wp_err->get_error_code() ) ;
+		$this->assertEquals( $expected, $wp_err->get_error_code() );
+
+	}
+
+	/**
+	 * Assert that a given object has an expected WP_Error message.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param string $expected Expected error message.
+	 * @param WP_Error $wp_err Error object.
+	 * @return void
+	 */
+	public function assertWPErrorMessageEquals( $expected, $wp_err ) {
+
+		$this->assertEquals( $expected, $wp_err->get_error_message() );
+
+	}
+
+	/**
+	 * Assert that a given object has an expected WP_Error data.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param array $expected Expected error data.
+	 * @param WP_Error $wp_err Error object.
+	 * @return void
+	 */
+	public function assertWPErrorDataEquals( $expected, $wp_err ) {
+
+		$this->assertEquals( $expected, $wp_err->get_error_data() );
 
 	}
 

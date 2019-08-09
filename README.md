@@ -78,8 +78,11 @@ Test cases which extend the `LLMS_Unit_Test_Case` class may access utility funct
 
 ###### `WP_Error`
 
-+ Assert a `WP_Error` code equals an expectation: `$this->assertWPErrorCodeEquals( $code, $wp_err );`
 + Assert an object is a `WP_Error`:  `$this->assertWPError( $wp_err );`
++ Assert a `WP_Error` code equals an expectation: `$this->assertWPErrorCodeEquals( $code, $wp_err );`
++ Assert a `WP_Error` message equals an expectation: `$this->assertWPErrorMessageEquals( $message, $wp_err );`
++ Assert a `WP_Error` data equals an expectation: `$this->assertWPErrorDataEquals( $data, $wp_err );`
+
 
 ##### Mock `$_GET`, `$_POST`, and `$_REQUEST` data
 
