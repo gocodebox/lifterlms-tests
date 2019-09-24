@@ -111,7 +111,7 @@ class LLMS_Tests_Bootstrap {
 			glob( $dir . '/framework/traits/*.php' ),
 			glob( $dir . '/framework/*.php' ),
 			glob( $dir . '/framework/exceptions/*.php' ),
-			glob( $dir . '/framework/factory/*.php' ),
+			glob( $dir . '/framework/factory/*.php' )
 		);
 
 		// Framework files from the add-on.
