@@ -10,6 +10,7 @@ include_once 'trait-llms-unit-test-mock-requests.php';
 trait LLMS_Unit_Test_Case_Base {
 
 	use LLMS_Unit_Test_Mock_Http;
+	use LLMS_Unit_Test_Assertions_String;
 	use LLMS_Unit_Test_Assertions_Output;
 	use LLMS_Unit_Test_Assertions_WP_Error;
 	use LLMS_Unit_Test_Mock_Requests;

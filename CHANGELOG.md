@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.5.0 - 2019-10-01
+-------------------
+
++ Added string assertion methods
+
+
 v1.4.0 - 2019-03-13
 -------------------
 
