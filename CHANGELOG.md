@@ -1,10 +1,17 @@
 LifterLMS Tests Changelog
 =========================
 
-v1.5.0 - 2019-10-11
+v1.6.0 - 2019-10-11
 -------------------
 
 + Added method to automate a LifterLMS quiz for a given user.
+
+
+v1.5.0 - 2019-10-01
+-------------------
+
++ Added string assertion methods
+
 
 v1.4.0 - 2019-03-13
 -------------------

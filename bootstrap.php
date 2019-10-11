@@ -97,18 +97,21 @@ class LLMS_Tests_Bootstrap {
 
 	/**
 	 * Load test suite files/includes
+	 *
+	 * @since 1.0.0
+	 *
 	 * @return   void
-	 * @since    1.0.0
-	 * @version  1.4.0
 	 */
 	public function includes() {
 
+		$dir = dirname( __FILE__ );
+
 		// Framework files included with llms-tests.
 		$files = array_merge(
-			glob( dirname( __FILE__ ) . '/framework/traits/*.php' ),
-			glob( dirname( __FILE__ ) . '/framework/*.php' ),
-			glob( dirname( __FILE__ ) . '/framework/exceptions/*.php' ),
-			glob( dirname( __FILE__ ) . '/framework/factory/*.php' )
+			glob( $dir . '/framework/traits/*.php' ),
+			glob( $dir . '/framework/*.php' ),
+			glob( $dir . '/framework/exceptions/*.php' ),
+			glob( $dir . '/framework/factory/*.php' )
 		);
 
 		// Framework files from the add-on.
