@@ -8,7 +8,7 @@ class LLMS_Unit_Test_Factory_For_Instructor extends WP_UnitTest_Factory_For_User
 	 * This is essentially the WP Core User Factory except it creates users with the "Instructor" role
 	 * and Returns an LLMS_Student object with gets
 	 *
-	 * @param   obj $factory  Global Factory.
+	 * @param object $factory Global Factory.
 	 */
 	public function __construct( $factory = null ) {
 		parent::__construct( $factory );
@@ -24,7 +24,7 @@ class LLMS_Unit_Test_Factory_For_Instructor extends WP_UnitTest_Factory_For_User
 	 * Retrieve student by ID
 	 *
 	 * @param   int   $user_id WP User ID.
-	 * @return  obj
+	 * @return  LLMS_Instructor
 	 */
 	public function get_object_by_id( $user_id ) {
 		return new LLMS_Instructor( $user_id );

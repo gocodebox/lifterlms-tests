@@ -7,21 +7,21 @@ class LLMS_Unit_Test_Factory extends WP_UnitTest_Factory {
 	/**
 	 * LLMS_Unit_Test_Factory_For_Course
 	 *
-	 * @var obj
+	 * @var LLMS_Unit_Test_Factory_For_Course
 	 */
 	public $course;
 
 	/**
 	 * LLMS_Unit_Test_Factory_For_Instructor
 	 *
-	 * @var obj
+	 * @var LLMS_Unit_Test_Factory_For_Instructor
 	 */
 	public $instructor;
 
 	/**
 	 * LLMS_Unit_Test_Factory_For_Membership
 	 *
-	 * @var obj
+	 * @var LLMS_Unit_Test_Factory_For_Membership
 	 */
 	public $membership;
 
@@ -29,14 +29,14 @@ class LLMS_Unit_Test_Factory extends WP_UnitTest_Factory {
 	/**
 	 * LLMS_Unit_Test_Factory_For_Order
 	 *
-	 * @var obj
+	 * @var LLMS_Unit_Test_Factory_For_Order
 	 */
 	public $order;
 
 	/**
 	 * LLMS_Unit_Test_Factory_For_Student
 	 *
-	 * @var obj
+	 * @var LLMS_Unit_Test_Factory_For_Student
 	 */
 	public $student;
 
