@@ -5,10 +5,10 @@ class LLMS_Unit_Test_Factory_For_Membership extends WP_UnitTest_Factory_For_Post
 	public function __construct( $factory = null ) {
 		parent::__construct( $factory );
 		$this->default_generation_definitions = array(
-			'status'  => 'publish',
-			'title'   => new WP_UnitTest_Generator_Sequence( 'Membership title %s' ),
-			'content' => new WP_UnitTest_Generator_Sequence( 'Membership content %s' ),
-			'excerpt' => new WP_UnitTest_Generator_Sequence( 'Membership excerpt %s' ),
+			'post_status'  => 'publish',
+			'post_title'   => new WP_UnitTest_Generator_Sequence( 'Membership title %s' ),
+			'post_content' => new WP_UnitTest_Generator_Sequence( 'Membership content %s' ),
+			'post_excerpt' => new WP_UnitTest_Generator_Sequence( 'Membership excerpt %s' ),
 			'post_type' => 'llms_membership'
 		);
 	}
