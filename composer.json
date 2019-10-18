@@ -19,9 +19,9 @@
   ],
   "scripts": {
     "tests-install": [
-      "vendor/bin/llms-tests teardown llms_blocks_tests root password localhost",
-      "vendor/bin/llms-tests install llms_blocks_tests root password localhost",
-      "vendor/bin/llms-tests plugin lifterlms"
+      "\"vendor/bin/llms-tests\" teardown llms_blocks_tests root password localhost",
+      "\"vendor/bin/llms-tests\" install llms_blocks_tests root password localhost",
+      "\"vendor/bin/llms-tests\" plugin lifterlms"
     ]
   }
 }
