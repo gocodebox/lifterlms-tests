@@ -18,7 +18,7 @@ trait LLMS_Unit_Test_Case_Base {
 	/**
 	 * @var LLMS_Unit_Test_Factory
 	 */
-	public $factory;
+	protected $factory;
 
 	/**
 	 * Setup the test case.
