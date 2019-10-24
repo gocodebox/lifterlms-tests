@@ -16,6 +16,11 @@ trait LLMS_Unit_Test_Case_Base {
 	use LLMS_Unit_Test_Mock_Requests;
 
 	/**
+	 * @var LLMS_Unit_Test_Factory
+	 */
+	protected $factory;
+
+	/**
 	 * Setup the test case.
 	 *
 	 * @since 1.6.0
