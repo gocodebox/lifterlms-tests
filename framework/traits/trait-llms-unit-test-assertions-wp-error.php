@@ -10,7 +10,7 @@ trait LLMS_Unit_Test_Assertions_WP_Error {
 	/**
 	 * Assert that a give object is a WP_Error
 	 *
-	 * @param   obj    $wp_err WP_Error.
+	 * @param   WP_Error $wp_err
 	 * @return  void
 	 * @since   1.2.1
 	 * @version 1.3.0
@@ -25,7 +25,7 @@ trait LLMS_Unit_Test_Assertions_WP_Error {
 	 * Arrest that a given object has an expected WP_Error code.
 	 *
 	 * @param   string    $expected expected error code
-	 * @param   obj    $wp_err WP_Error.
+	 * @param   WP_Error $wp_err
 	 * @return  void
 	 * @since   1.2.1
 	 * @version 1.3.0

@@ -4,6 +4,11 @@
  */
 class LLMS_Unit_Test_Util {
 
+	/**
+	 * @param object $obj
+	 * @return ReflectionClass
+	 * @throws ReflectionException
+	 */
 	private static function get_class( $obj ) {
 
 		return new ReflectionClass( $obj );
@@ -12,10 +17,12 @@ class LLMS_Unit_Test_Util {
 
 	/**
 	 * Call a method (private or protected)
-	 * @param   obj $obj Instantiated class instance
-	 * @param   string $name Name of the method to call
-	 * @param   array $args arguments to pass to the method
-	 * @return  mixed
+	 *
+	 * @param object $obj  Instantiated class instance
+	 * @param string $name Name of the method to call
+	 * @param array  $args arguments to pass to the method
+	 * @return mixed
+	 * @throws ReflectionException
 	 */
 	public static function call_method( $obj, $name, array $args = array() ) {
 
@@ -26,9 +33,11 @@ class LLMS_Unit_Test_Util {
 
 	/**
 	 * Alias of LLMS_Unit_Test_Utilities::get_private_method()
-	 * @param   obj $obj Instantiated class instance
-	 * @param   string $name Name of the method to call
-	 * @return  ReflectionMethod
+	 *
+	 * @param object $obj  Instantiated class instance
+	 * @param string $name Name of the method to call
+	 * @return ReflectionMethod
+	 * @throws ReflectionException
 	 */
 	public static function get_protected_method( $obj, $name ) {
 
@@ -38,9 +47,11 @@ class LLMS_Unit_Test_Util {
 
 	/**
 	 * Retrieve a testable private/protected class method
-	 * @param   obj $obj Instantiated class instance
-	 * @param   string $name Name of the method to call
-	 * @return  ReflectionMethod
+	 *
+	 * @param object $obj  Instantiated class instance
+	 * @param string $name Name of the method to call
+	 * @return ReflectionMethod
+	 * @throws ReflectionException
 	 */
 	public static function get_private_method( $obj, $name ) {
 
@@ -51,6 +62,12 @@ class LLMS_Unit_Test_Util {
 
 	}
 
+	/**
+	 * @param object $obj
+	 * @param string $name
+	 * @return ReflectionProperty
+	 * @throws ReflectionException
+	 */
 	public static function get_private_property( $obj, $name ) {
 
 		$class = self::get_class( $obj );
@@ -59,6 +76,12 @@ class LLMS_Unit_Test_Util {
 
 	}
 
+	/**
+	 * @param object $obj
+	 * @param string $name
+	 * @param mixed $val
+	 * @throws ReflectionException
+	 */
 	public static function set_private_property( $obj, $name, $val ) {
 
 		$prop = self::get_private_property( $obj, $name );
