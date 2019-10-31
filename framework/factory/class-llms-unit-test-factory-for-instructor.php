@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Unit test factory for instructors.
+ *
+ * Note: The below `@method` notations are defined solely for the benefit of IDEs,
+ * as a way to indicate expected return values from the given factory methods.
+ *
+ * @method LLMS_Instructor create_and_get( $args = array(), $generation_definitions = null )
+ */
 class LLMS_Unit_Test_Factory_For_Instructor extends WP_UnitTest_Factory_For_User {
 
 	/**
