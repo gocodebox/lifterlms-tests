@@ -2,8 +2,9 @@
 /**
  * Tests Bootstrap
  *
- * @since    1.0.0
- * @version  1.3.0
+ * @since 1.0.0
+ * @since Use `getcwd()` to set the `$plugin_dir` variable.
+ * @version 1.6.1
  */
 class LLMS_Tests_Bootstrap {
 
@@ -67,7 +68,7 @@ class LLMS_Tests_Bootstrap {
 		}
 
 		$this->tests_dir    = dirname( $this->file );
-		$this->plugin_dir   = dirname( $this->tests_dir );
+		$this->plugin_dir   = getcwd();
 		$this->wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : 'tmp/tests/wordpress-tests-lib';
 
 		// load test function so tests_add_filter() is available

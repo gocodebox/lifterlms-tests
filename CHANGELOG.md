@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.6.1 - 2019-11-04
+-------------------
+
++ Create plugin directory reference with `getcwd()`.
+
+
 v1.6.0 - 2019-10-11
 -------------------
 
