@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.6.2 - 2019-11-11
+-------------------
+
++ Allow usage of `LLMS_Unit_Test_Util::call_method()` on static class methods.
+
+
 v1.6.1 - 2019-11-04
 -------------------
 
