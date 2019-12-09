@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.7.0 - 2019-12-09
+-------------------
+
++ Add `LLMS_Tests_Cookie` class to mock and test cookies set by `llms_setcookie()`.
+
+
 v1.6.2 - 2019-11-11
 -------------------
 
