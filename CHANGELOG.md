@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.7.1 - 2019-12-09
+-------------------
+
++ Also set the `$_COOKIE` superglobal when setting mock cookies.
+
+
 v1.7.0 - 2019-12-09
 -------------------
 

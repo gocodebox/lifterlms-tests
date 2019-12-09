@@ -3,7 +3,7 @@
  * Get/Set mock cookie data set by `llms_setcookie()`.
  *
  * @since 1.7.0
- * @version 1.7.0
+ * @version 1.7.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,6 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * LLMS_Test_Cookies class.
  *
  * @since 1.7.0
+ * @since 1.7.1 Also set the cookie in the $_COOKIE superglobal.
  */
 class LLMS_Tests_Cookies {
 
@@ -113,6 +114,7 @@ class LLMS_Tests_Cookies {
 	 * the returns of methods that set cookies and write tests for those functions.
 	 *
 	 * @since 1.7.0
+	 * @since 1.7.1 Also set the cookie in the $_COOKIE superglobal.
 	 *
 	 * @link https://www.php.net/manual/en/function.setcookie.php
 	 *
@@ -130,6 +132,7 @@ class LLMS_Tests_Cookies {
 	public function set( $name, $value = '', $expires = 0, $path = '', $domain = '', $secure = false, $httponly = false ) {
 		if ( $this->set_return_value ) {
 			$this->cookies[ $name ] = compact( 'value', 'expires', 'path', 'domain', 'secure', 'httponly' );
+			$_COOKIE[ $name ] = $value;
 		}
 		return $this->set_return_value;
 	}
