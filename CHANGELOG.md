@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.7.2 - 2019-12-09
+-------------------
+
++ Unset mocked cookies `$_COOKIE` superglobal when unsetting mock cookies.
+
+
 v1.7.1 - 2019-12-09
 -------------------
 

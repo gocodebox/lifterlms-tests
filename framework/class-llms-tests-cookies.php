@@ -3,7 +3,7 @@
  * Get/Set mock cookie data set by `llms_setcookie()`.
  *
  * @since 1.7.0
- * @version 1.7.1
+ * @version 1.7.2
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.7.0
  * @since 1.7.1 Also set the cookie in the $_COOKIE superglobal.
+ * @since 1.7.2 Unset global $_COOKIE when performing an unset.
  */
 class LLMS_Tests_Cookies {
 
@@ -141,22 +142,28 @@ class LLMS_Tests_Cookies {
 	 * Delete a single cookie by name.
 	 *
 	 * @since 1.7.0
+	 * @since 1.7.2 Unset global $_COOKIE when performing an unset.
 	 *
 	 * @param string $name The name of the cookie.
 	 * @return void
 	 */
 	public function unset( $name ) {
 		unset( $this->cookies[ $name ] );
+		unset( $_COOKIE[ $name ] );
 	}
 
 	/**
 	 * Delete all cookies.
 	 *
 	 * @since 1.7.0
+	 * @since 1.7.2 Unset global $_COOKIE when performing an unset.
 	 *
 	 * @return void
 	 */
 	public function unset_all() {
+		foreach ( array_keys( $this->cookies ) as $key ) {
+			unset( $_COOKIE[ $key ] );
+		}
 		$this->cookies = array();
 	}
 
