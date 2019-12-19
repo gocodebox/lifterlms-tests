@@ -12,7 +12,7 @@ mkdir -p $TMPDIR
 
 download() {
 	if [ `which curl` ]; then
-		curl -s "$1" > "$2";
+		curl -s -L "$1" > "$2";
 	elif [ `which wget` ]; then
 		wget -nv -O "$2" "$1"
 	fi
@@ -268,8 +268,9 @@ function run {
 		# Download from an arbitrary url.
 		else
 
-			download ${SLUG_OR_ZIP} $TMPDIR/${SLUG_OR_ZIP}
-			ZIP=${SLUG_OR_ZIP}
+			FILENAME=${SLUG_OR_ZIP##*/}
+			download ${SLUG_OR_ZIP} $TMPDIR/${FILENAME}
+			ZIP=$TMPDIR/${FILENAME}
 
 		fi
 
