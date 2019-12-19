@@ -217,3 +217,82 @@ Access the factory: `$this->factory->instructor`
 Create a instructor and retrieve the instructor ID: `$instructor_id = $this->factory->instructor->create();`
 
 Create a instructor and retrieve LLMS_Instructor object: `$instructor = $this->factory->instructor->create_and_get();`
+
+
+## Cookies
+
+Test methods and functions that set cookies via `llms_setcookie` using the `LLMS_Tests_Cookies` class.
+
+Access the class: `$this->cookies`.
+
+##### Set a cookie
+
+```php
+$this->cookies->set( $name, $value, ... )
+```
+
+##### Retrieve set cookie(s)
+
+```php
+$this->cookies->set( 'name', 'value', 0, ... );
+
+// Retrieve all cookies
+$cookies = $this->cookies->get_all();
+var_dump( $cookies );
+// array(
+//   'name' => array(
+//      'value'   => 'value',
+//      'expires' => 0,
+//      ...
+//   ),
+// )
+//
+
+// Retrieve a single cookie.
+$cookie = $this->cookies->get( 'name' );
+var_dump( $cookie );
+// array(
+//    'value'   => 'value',
+//    'expires' => 0,
+//    ...
+//   ),
+```
+
+##### Mock the expected response of llms_setcookie()
+
+Mock a success response:
+
+```php
+$this->cookies->expect_success();
+$this->assertTrue( llms_setcookie( 'name', 'val' ) );
+```
+
+In the testing suite `llms_setcookie()` will always respond `true` so it's not necessary to call `expect_success()` unless you previously call `expect_error()` in the same test.
+
+
+Mock an error response:
+
+```php
+$this->cookies->expect_error();
+$this->assertFalse( llms_setcookie( 'name', 'val' ) );
+```
+
+
+##### Clear set cookie(s)
+
+Clear all cookies:
+
+```php
+$this->cookies->unset_all()
+var_dump( $this->cookies->get_all() );
+// array()
+```
+
+Clear a single cookie by name:
+
+```php
+llms_setcookie( 'name', 'val' );
+$this->cookies->unset( 'name' );
+var_dump( $this->cookies->get( 'name' ) );
+// null
+```

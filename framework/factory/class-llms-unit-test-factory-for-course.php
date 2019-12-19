@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Unit test factory for courses.
+ *
+ * Note: The below `@method` notations are defined solely for the benefit of IDEs,
+ * as a way to indicate expected return values from the given factory methods.
+ *
+ * @method LLMS_Course create_and_get( $args = array(), $generation_definitions = null )
+ */
 class LLMS_Unit_Test_Factory_For_Course extends WP_UnitTest_Factory_For_Post {
 
 	public function __construct( $factory = null ) {

@@ -48,6 +48,34 @@ function llms_tests_reset_current_time() {
 }
 
 /**
+ * Mock the LifterLMS Core `llms_setcookie()` so functions setting cookies can be tested.
+ *
+ * Mocks the function to use `LLMS_Tests_Cookies::set()` which accepts the same arguments as
+ * `llms_setcookie()` and php native `setcookie()`.
+ *
+ * In any classes extending the base testcase you can access set cookies via `$this->cookies`.
+ *
+ * @since 1.7.0
+ *
+ * @see LLMS_Tests_Cookies
+ *
+ * @param string $name The name of the cookie.
+ * @param string $value The value of the cookie.
+ * @param int $expires The time wehn the cookie expires as a Unix timestamp.
+ * @param string $path The path on the server where the cookie will be available.
+ * @param string $domain The (sub)domain that the cookie is available to.
+ * @param bool $secure Indicates the cookie should only be transmitted over a secure HTTPS connection.
+ * @param bool $httponly When `true` the cookie will only be made accessible through the HTTP protocol,
+ *                       preventing it from being accessed by scripting languages (such as Javascript).
+ *
+ * @return boolean
+ */
+function llms_setcookie( $name, $value = '', $expires = 0, $path = '', $domain = '', $secure = false, $httponly = false ) {
+	$cookies = LLMS_Tests_Cookies::instance();
+	return $cookies->set( $name, $value, $expires, $path, $domain, $secure, $httponly );
+}
+
+/**
  * Plug core `llms_filter_input` to allow data to be mocked via the mock request test case methods.
  *
  * @param   int    $type           One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.

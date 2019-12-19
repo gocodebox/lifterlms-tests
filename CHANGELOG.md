@@ -1,6 +1,36 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.7.2 - 2019-12-09
+-------------------
+
++ Unset mocked cookies `$_COOKIE` superglobal when unsetting mock cookies.
+
+
+v1.7.1 - 2019-12-09
+-------------------
+
++ Also set the `$_COOKIE` superglobal when setting mock cookies.
+
+
+v1.7.0 - 2019-12-09
+-------------------
+
++ Add `LLMS_Tests_Cookie` class to mock and test cookies set by `llms_setcookie()`.
+
+
+v1.6.2 - 2019-11-11
+-------------------
+
++ Allow usage of `LLMS_Unit_Test_Util::call_method()` on static class methods.
+
+
+v1.6.1 - 2019-11-04
+-------------------
+
++ Create plugin directory reference with `getcwd()`.
+
+
 v1.6.0 - 2019-10-11
 -------------------
 

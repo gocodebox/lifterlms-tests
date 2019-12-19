@@ -2,11 +2,18 @@
 /**
  * Mock Request methods
  * @since 1.5.0
- * @version 1.6.0
+ * @version 1.7.2
  */
 
 include_once 'trait-llms-unit-test-mock-requests.php';
 
+/**
+ * LLMS_Unit_Test_Case_Base trait.
+ *
+ * @since 1.5.0
+ * @since 1.7.0 Add `$cookies` property providing access to the instance of `LLMS_Tests_Cookies` class.
+ * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
+ */
 trait LLMS_Unit_Test_Case_Base {
 
 	use LLMS_Unit_Test_Mock_Http;
@@ -16,15 +23,27 @@ trait LLMS_Unit_Test_Case_Base {
 	use LLMS_Unit_Test_Mock_Requests;
 
 	/**
+	 * @var LLMS_Tests_Cookies
+	 */
+	protected $cookies;
+
+	/**
+	 * @var LLMS_Unit_Test_Factory
+	 */
+	protected $factory;
+
+	/**
 	 * Setup the test case.
 	 *
 	 * @since 1.6.0
+	 * @since 1.7.0 Initailize the `$cookies` property.
 	 *
 	 * @return void
 	 */
 	public function setUp() {
 
 		parent::setUp();
+		$this->cookies = LLMS_Tests_Cookies::instance();
 		$this->factory = new LLMS_Unit_Test_Factory();
 
 	}
@@ -97,13 +116,29 @@ trait LLMS_Unit_Test_Case_Base {
 	 * Teardown the test.
 	 *
 	 * @since 1.5.0
+	 * @since 1.7.0 Unset all cookies set by LLMS_Tests_Cookies and reset the expected response of all cookie sets to `true`.
+	 * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
 	 *
 	 * @return void
 	 */
 	public function tearDown() {
 
 		parent::tearDown();
+
+		// Reset mocked data.
 		llms_tests_reset_current_time();
+
+		// Unset all mocked cookies.
+		$this->cookies->unset_all();
+
+		// Reset the expected cookie setter response.
+		$this->cookies->expect_success();
+
+		// Clear all LifterLMS notices.
+		llms_clear_notices();
+
+		// Clearing REQUEST_URI is necessary after running tests that utilize $this->go_to().
+		$_SERVER['REQUEST_URI'] = '';
 
 	}
 

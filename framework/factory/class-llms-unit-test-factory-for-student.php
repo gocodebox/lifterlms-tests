@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Unit test factory for students.
+ *
+ * Note: The below `@method` notations are defined solely for the benefit of IDEs,
+ * as a way to indicate expected return values from the given factory methods.
+ *
+ * @method LLMS_Student create_and_get( $args = array(), $generation_definitions = null )
+ */
 class LLMS_Unit_Test_Factory_For_Student extends WP_UnitTest_Factory_For_User {
 
 	/**
@@ -8,7 +16,7 @@ class LLMS_Unit_Test_Factory_For_Student extends WP_UnitTest_Factory_For_User {
 	 * This is essentially the WP Core User Factory except it creates users with the "Student" role
 	 * and Returns an LLMS_Student object with gets
 	 *
-	 * @param   obj $factory  Global Factory.
+	 * @param object $factory Global Factory.
 	 */
 	public function __construct( $factory = null ) {
 		parent::__construct( $factory );
@@ -57,7 +65,7 @@ class LLMS_Unit_Test_Factory_For_Student extends WP_UnitTest_Factory_For_User {
 	 * Retrieve student by ID
 	 *
 	 * @param   int   $user_id WP User ID.
-	 * @return  obj
+	 * @return  LLMS_Student
 	 */
 	public function get_object_by_id( $user_id ) {
 		return new LLMS_Student( $user_id );
