@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.7.3 - 2019-12-19
+-------------------
+
++ Fix issue causing `plugin` script subcommand from being able to properly download and unzip plugins loaded from an arbitrary zip file URL on the web.
+
+
 v1.7.2 - 2019-12-09
 -------------------
 
