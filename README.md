@@ -69,6 +69,17 @@ Test cases which extend the `LLMS_Unit_Test_Case` class may access utility funct
 
 Test cases which extend the `LLMS_Unit_Test_Case` class may access utility functiosn built into the test case class.
 
+###### Assets
+
+Assert that assets (scripts or styles) are registered or enqueued (or inversely not registered or not enqueued) with WordPress dependency managements classes.
+
+`$type` is either "script" or "style" and `$handle` is the asset handle used to register/enqueue the script.
+
++ Assert a script/style is registered: `$this->assertAssetIsRegistered( $type, $handle )`
++ Assert a script/style is not registered: `$this->assertAssetNotRegistered( $type, $handle )`
++ Assert a script/style is enqueued: `$this->assertAssetIsEnqueued( $type, $handle )`
++ Assert a script/style is not enqueued: `$this->assertAssetNotEnqueued( $type, $handle )`
+
 ###### Output Buffering
 
 + Assert the output of a function contains a string: `$this->assertOutputContains( $contains, $callable, $args_array );`

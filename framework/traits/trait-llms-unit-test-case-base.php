@@ -2,7 +2,7 @@
 /**
  * Mock Request methods
  * @since 1.5.0
- * @version 1.7.2
+ * @version 1.8.0
  */
 
 include_once 'trait-llms-unit-test-mock-requests.php';
@@ -13,12 +13,14 @@ include_once 'trait-llms-unit-test-mock-requests.php';
  * @since 1.5.0
  * @since 1.7.0 Add `$cookies` property providing access to the instance of `LLMS_Tests_Cookies` class.
  * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
+ * @since 1.8.0 Added asset assertions.
  */
 trait LLMS_Unit_Test_Case_Base {
 
 	use LLMS_Unit_Test_Mock_Http;
-	use LLMS_Unit_Test_Assertions_String;
+	use LLMS_Unit_Test_Assertions_Assets;
 	use LLMS_Unit_Test_Assertions_Output;
+	use LLMS_Unit_Test_Assertions_String;
 	use LLMS_Unit_Test_Assertions_WP_Error;
 	use LLMS_Unit_Test_Mock_Requests;
 

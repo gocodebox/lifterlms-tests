@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.8.0 - 2020-01-29
+-------------------
+
++ Added assertions for determining if assets are registered and/or enqueued with the WP asset dependency classes.
+
+
 v1.7.3 - 2019-12-19
 -------------------
 
