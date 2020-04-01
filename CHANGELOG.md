@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.9.0 - 2020-04-01
+-------------------
+
++ Added `llms-env`, a set of tools and configurations for manager a simple Docker service. Useful for e2e testing.
+
+
 v1.8.0 - 2020-01-29
 -------------------
 
