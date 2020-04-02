@@ -233,7 +233,7 @@ function run {
 		fi
 
 		SLUG_OR_ZIP=$2
-		VERSION=${3-latest}
+		VERSION=${3:-latest}
 		ZIP=""
 
 		# Download plugin from WordPress.org.
