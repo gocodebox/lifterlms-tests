@@ -51,9 +51,9 @@ function run {
 		DB_NAME=$2
 		DB_USER=$3
 		DB_PASS=$4
-		DB_HOST=${5-localhost}
-		WP_VERSION=${6-latest}
-		SKIP_DB_CREATE=${7-false}
+		DB_HOST=${5:-localhost}
+		WP_VERSION=${6:-latest}
+		SKIP_DB_CREATE=${7:-false}
 
 		if [[ $WP_VERSION =~ ^[0-9]+\.[0-9]+\-(beta|RC)[0-9]+$ ]]; then
 			WP_BRANCH=${WP_VERSION%\-*}
@@ -196,7 +196,7 @@ function run {
 		DB_NAME=$2
 		DB_USER=$3
 		DB_PASS=$4
-		DB_HOST=${5-localhost}
+		DB_HOST=${5:-localhost}
 
 		delete_db() {
 
