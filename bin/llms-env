@@ -145,7 +145,7 @@ elif [ "up" == $COMMAND ]; then
 			READY="no"
 			while [[ "no" == $READY ]]; do
 
-				INSTALLED="$( $0 wp core is-installed 2>$1 )"
+				INSTALLED="$( $0 wp core is-installed 2>&1 )"
 				# Only check URL if installation is complete.
 				if [[ "0" == $? ]]; then
 					URL=$( $0 wp option get siteurl | grep :// )
