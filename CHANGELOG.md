@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.10.0 - 2020-04-08
+--------------------
+
++ Added assertions for testing against LifterLMS notices added via `llms_add_notice()`.
+
+
 v1.9.0 - 2020-04-01
 -------------------
 

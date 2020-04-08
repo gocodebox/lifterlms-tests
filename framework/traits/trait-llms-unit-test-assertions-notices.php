@@ -2,15 +2,14 @@
 /**
  * Assertions related to checking for LifterLMS Notices
  *
- * @since [version]
- * @version [version]
+ * @since 1.10.0
  */
 trait LLMS_Unit_Test_Assertions_Notices {
 
 	/**
 	 * Retrieve raw LifterLMS notice data.
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @return array[]
 	 */
@@ -23,7 +22,7 @@ trait LLMS_Unit_Test_Assertions_Notices {
 	 *
 	 * Optionally check for a specific notice type.
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @param  string $type Specify a specific notice type, eg "error".
 	 * @return void
@@ -48,7 +47,7 @@ trait LLMS_Unit_Test_Assertions_Notices {
 	/**
 	 * Assert that LifterLMS has a specific notice by message and optionally type.
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @param string $msg  Notice message.
 	 * @param string $type Optionally check for the notice by notice type.
@@ -74,7 +73,7 @@ trait LLMS_Unit_Test_Assertions_Notices {
 	/**
 	 * Assert that the number of LifterLMS notices equals an expected count.
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @param int    $expect Expected number of notices.
 	 * @param string $type   Optionally specify a notice type.
