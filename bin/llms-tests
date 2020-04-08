@@ -12,7 +12,7 @@ mkdir -p $TMPDIR
 
 download() {
 	if [ `which curl` ]; then
-		curl -s "$1" > "$2";
+		curl -s -L "$1" > "$2";
 	elif [ `which wget` ]; then
 		wget -nv -O "$2" "$1"
 	fi
@@ -51,9 +51,9 @@ function run {
 		DB_NAME=$2
 		DB_USER=$3
 		DB_PASS=$4
-		DB_HOST=${5-localhost}
-		WP_VERSION=${6-latest}
-		SKIP_DB_CREATE=${7-false}
+		DB_HOST=${5:-localhost}
+		WP_VERSION=${6:-latest}
+		SKIP_DB_CREATE=${7:-false}
 
 		if [[ $WP_VERSION =~ ^[0-9]+\.[0-9]+\-(beta|RC)[0-9]+$ ]]; then
 			WP_BRANCH=${WP_VERSION%\-*}
@@ -196,7 +196,7 @@ function run {
 		DB_NAME=$2
 		DB_USER=$3
 		DB_PASS=$4
-		DB_HOST=${5-localhost}
+		DB_HOST=${5:-localhost}
 
 		delete_db() {
 
@@ -233,7 +233,7 @@ function run {
 		fi
 
 		SLUG_OR_ZIP=$2
-		VERSION=${3-latest}
+		VERSION=${3:-latest}
 		ZIP=""
 
 		# Download plugin from WordPress.org.
@@ -268,8 +268,9 @@ function run {
 		# Download from an arbitrary url.
 		else
 
-			download ${SLUG_OR_ZIP} $TMPDIR/${SLUG_OR_ZIP}
-			ZIP=${SLUG_OR_ZIP}
+			FILENAME=${SLUG_OR_ZIP##*/}
+			download ${SLUG_OR_ZIP} $TMPDIR/${FILENAME}
+			ZIP=$TMPDIR/${FILENAME}
 
 		fi
 
@@ -288,5 +289,5 @@ function run {
 
 }
 
-# Run the Scrip
-run $1 $2 $3 $4 $5 $6 $7
+# Run the Script.
+run "$1" "$2" "$3" "$4" "$5" "$6" "$7"

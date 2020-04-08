@@ -1,6 +1,30 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.9.0 - 2020-04-01
+-------------------
+
++ Added `llms-env`, a set of tools and configurations for manager a simple Docker service. Useful for e2e testing.
+
+
+v1.8.0 - 2020-01-29
+-------------------
+
++ Added assertions for determining if assets are registered and/or enqueued with the WP asset dependency classes.
+
+
+v1.7.3 - 2019-12-19
+-------------------
+
++ Fix issue causing `plugin` script subcommand from being able to properly download and unzip plugins loaded from an arbitrary zip file URL on the web.
+
+
+v1.7.2 - 2019-12-09
+-------------------
+
++ Unset mocked cookies `$_COOKIE` superglobal when unsetting mock cookies.
+
+
 v1.7.1 - 2019-12-09
 -------------------
 

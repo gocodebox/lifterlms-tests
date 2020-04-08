@@ -17,6 +17,35 @@ LifterLMS Tests is a project to help bootstrap automated testing in LifterLMS pr
 + Teardown Testing Suite: `.vendor/bin/llms-tests teardown <db-name> <db-user> <db-pass> [db-host]`
 + Install a Plugin: `./vendor/bin/llms-tests plugin <slug_or_zip_giturl> [version]`
 + Run tests: `./vendor/bin/phpunit`
++ Environment: `./vendor/bin/llms-env <command> [options]`. See `./vendor/bin/llms-env --help` for full documentation.
+
+## Environment
+
+The `llms-env` command provides a simple set of tools helpful in managing a set of Docker containers for use in development and testing of a LifterLMS plugin.
+
+For customization, run `llms-env config` to create the recommended `docker-compose.yml` and `.llmsenv` files in the project root.
+
+The `docker-compose.yml` will automatically mount the root directory into the `wp-content/plugin` directory.
+
+The `.llmsenv` file allows customization of the WordPress username, localhost port, and more. This file is optional and the defaults will be used if any variables are excluded.
+
+After setting up the configuration files run `llms-env up` to create the containers, install, and configure WordPress.
+
+If any additional plugins are required or any other WordPress configurations are required, try creating a composer script that runs the required commands via `wp-cli` on the main PHP service container. For example, add a script in your composer.json:
+
+```json
+{
+  "scripts": {
+    "env-setup": [
+      "./vendor/bin/llms-env wp plugin install lifterlms --activate"
+    ]
+  }
+}
+```
+
+This can be run to activate the LifterLMS core.
+
+The `llms-env` provides many commands for composing and managing the Docker containers. Run `llms-env --help` for a full list of available commands as well as information on their usage.
 
 
 ## Predefined scripts
@@ -68,6 +97,17 @@ Test cases which extend the `LLMS_Unit_Test_Case` class may access utility funct
 ##### Assertions
 
 Test cases which extend the `LLMS_Unit_Test_Case` class may access utility functiosn built into the test case class.
+
+###### Assets
+
+Assert that assets (scripts or styles) are registered or enqueued (or inversely not registered or not enqueued) with WordPress dependency managements classes.
+
+`$type` is either "script" or "style" and `$handle` is the asset handle used to register/enqueue the script.
+
++ Assert a script/style is registered: `$this->assertAssetIsRegistered( $type, $handle )`
++ Assert a script/style is not registered: `$this->assertAssetNotRegistered( $type, $handle )`
++ Assert a script/style is enqueued: `$this->assertAssetIsEnqueued( $type, $handle )`
++ Assert a script/style is not enqueued: `$this->assertAssetNotEnqueued( $type, $handle )`
 
 ###### Output Buffering
 
