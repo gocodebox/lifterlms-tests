@@ -78,6 +78,23 @@ class LLMS_Unit_Test_Util {
 	}
 
 	/**
+	 * Get the value of a private property.
+	 *
+	 * @since 1.11.0
+	 *
+	 * @param object $obj Object.
+	 * @param string $name Property name.
+	 * @return mixed
+	 */
+	public static function get_private_property_value( $obj, $name ) {
+
+		$prop = self::get_private_property( $obj, $name );
+		$prop->setAccessible( true );
+		return $prop->getValue( $obj );
+
+	}
+
+	/**
 	 * @param object $obj
 	 * @param string $name
 	 * @param mixed $val

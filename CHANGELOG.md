@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.11.0 - 2020-04-22
+--------------------
+
++ Added utility function `LLMS_Unit_Test_Util::get_private_property_value()`.
+
+
 v1.10.0 - 2020-04-08
 --------------------
 
