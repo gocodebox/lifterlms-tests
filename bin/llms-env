@@ -65,13 +65,14 @@ if [[ "help" == $COMMAND || "--help" == $COMMAND || "-h" == $COMMAND ]]; then
 	echo ""
 	echo "Available commands:"
 	echo "   config:  Creates configuration override files"
-	echo "   down:    Stop containers"
+	echo "   down:    Stop and remove containers and volumes"
 	echo "   up:      Start containers"
 	echo "   ps:      List containers"
-	echo "   reset:   Destroy and recreate containers"
+	echo "   reset:   Destroy and recreate containers and volumes"
 	echo "   restart: Restart containers"
-	echo "   rm:      Remove containers"
+	echo "   rm:      Remove containers and volumes"
 	echo "   ssh:     Open an interactive bash session with the PHP service container"
+	echo "   stop:    Stop containers without removing them"
 	echo "   wp:      Execute a wp-cli command inside the PHP service container"
 
 elif [ "config" == $COMMAND ]; then
@@ -110,16 +111,17 @@ elif [ "config" == $COMMAND ]; then
 elif [ "down" == $COMMAND ]; then
 
 	if [[ "-h" == $2 || "--help" == $2 ]]; then
-		output_help "down" "$0 down [-h | --help]" "Stops Docker containers for the environment" "$HELP_OPTIONS_HELP"
+		output_help "down" "$0 down [-h | --help]" "Stops and removes Docker containers and volumes for the environment" "$HELP_OPTIONS_HELP"
 	else
-		$DOCKER_CMD $COMMAND
+		$DOCKER_CMD $COMMAND -v
 	fi
 
 elif [ "ps" == $COMMAND ]; then
 
 	if [[ "-h" == $2 || "--help" == $2 ]]; then
-		HELP_OPTS=$'\n\n   -q, --quiet\n      Only display IDs'
-		output_help "ps" "$0 ps [-h | --help] [-q | --quiet] [SERVICE...]" "List Docker containers for the environment" "$HELP_OPTIONS_HELP $HELP_OPTS"
+		HELP_OPTS=$'\n\n   -a, --all\n        Include stopped containers'
+		HELP_OPTS=$HELP_OPTS$'\n\n   -q, --quiet\n      Only display IDs'
+		output_help "ps" "$0 ps [-h | --help] [-a | --all] [-q | --quiet] [SERVICE...]" "List Docker containers for the environment" "$HELP_OPTIONS_HELP $HELP_OPTS"
 	else
 		$DOCKER_CMD ps ${*:2}
 	fi
@@ -182,7 +184,6 @@ elif [ "reset" == $COMMAND ]; then
 
 		$0 wp db reset --yes
 		$0 down
-		$0 rm
 		$0 up$OPTS
 	fi
 
@@ -200,6 +201,14 @@ elif [ "rm" == $COMMAND ]; then
 		output_help "rm" "$0 rm [-h | --help]" "Removes stopped Docker containers for the environment and deletes all volumes" "$HELP_OPTIONS_HELP"
 	else
 		$DOCKER_CMD rm -v --force
+	fi
+
+elif [ "stop" == $COMMAND ]; then
+
+	if [[ "-h" == $2 || "--help" == $2 ]]; then
+		output_help "stop" "$0 stop [-h | --help]" "Stops running Docker containers for the environment" "$HELP_OPTIONS_HELP"
+	else
+		$DOCKER_CMD stop
 	fi
 
 elif [ "ssh" == $COMMAND ]; then

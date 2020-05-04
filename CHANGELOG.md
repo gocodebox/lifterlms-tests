@@ -1,6 +1,15 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.12.0 - 2020-05-04
+--------------------
+
++ Updated the `llms-env down` command to include removal of volumes.
++ Remove call to `llms-env rm` when using `llms-env reset` since it's redundant after calling `llms-env down`.
++ Added the `llms-env stop` command to allow stopping containers without removal.
++ Added option `-a --all` to the `llms-env ps` command to allow listing the status of stopped containers.
+
+
 v1.11.0 - 2020-04-22
 --------------------
 
