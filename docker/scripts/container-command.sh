@@ -42,7 +42,7 @@ echo "Directory permissions fixed."
 # Use always --allow-root because docker runs the service as root user
 if ! $(wp --allow-root core is-installed); then
 
-    # Install WordPress itself
+    # Install WordPress itself.
     wp --allow-root core install \
     	--path="/var/www/html" \
     	--url="http://localhost:${WORDPRESS_PORT}" \
@@ -51,10 +51,12 @@ if ! $(wp --allow-root core is-installed); then
     	--admin_password="${WORDPRESS_USER_PASS}" \
     	--admin_email="${WORDPRESS_USER_EMAIL}"
 
-    # Setup wp-config.php
-    wp --allow-root config set WP_DEBUG true --raw
-    wp --allow-root config set WP_DEBUG_DISPLAY true --raw
-    wp --allow-root config set SCRIPT_DEBUG true --raw
+    # Update WP.
+    wp --allow-root core update
+    wp --allow-root core update-db
+
+    # Setup wp-config.php.
+    wp --allow-root config set WP_DEBUG false --raw
     wp --allow-root config set FS_METHOD direct # see https://git.io/fj4IK, https://git.io/fj4Ii
 
     # Permalink structure.

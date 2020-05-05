@@ -1,6 +1,14 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.12.1 - 2020-05-05
+--------------------
+
++ Disable `WP_DEBUG` in new docker environments.
++ Don't enable `WP_SCRIPT_DEBUG` in new docker environments.
++ Automatically update the WP core and run WP db updates when starting new docker environments.
+
+
 v1.12.0 - 2020-05-04
 --------------------
 
