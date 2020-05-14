@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.12.2 - 2020-05-13
+--------------------
+
++ Fix error encountered when using `llms_setcookie()`.
+
+
 v1.12.1 - 2020-05-05
 --------------------
 

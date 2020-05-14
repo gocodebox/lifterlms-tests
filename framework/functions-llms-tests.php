@@ -1,4 +1,4 @@
-<?php
+r<?php
 /**
  * Plug llms_current_time() to allow mocking of the current time via the $llms_tests_mock_time global
  * @param    string       $type   Type of time to retrieve. Accepts 'mysql', 'timestamp', or PHP date format string (e.g. 'Y-m-d').
@@ -56,6 +56,7 @@ function llms_tests_reset_current_time() {
  * In any classes extending the base testcase you can access set cookies via `$this->cookies`.
  *
  * @since 1.7.0
+ * @since 1.12.2 Include cookies class if not already loaded.
  *
  * @see LLMS_Tests_Cookies
  *
@@ -71,6 +72,9 @@ function llms_tests_reset_current_time() {
  * @return boolean
  */
 function llms_setcookie( $name, $value = '', $expires = 0, $path = '', $domain = '', $secure = false, $httponly = false ) {
+	if ( ! class_exists( 'LLMS_Tests_Cookies' ) ) {
+		include 'class-llms-tests-cookies.php';
+	}
 	$cookies = LLMS_Tests_Cookies::instance();
 	return $cookies->set( $name, $value, $expires, $path, $domain, $secure, $httponly );
 }
