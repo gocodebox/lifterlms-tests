@@ -1,4 +1,4 @@
-r<?php
+<?php
 /**
  * Plug llms_current_time() to allow mocking of the current time via the $llms_tests_mock_time global
  * @param    string       $type   Type of time to retrieve. Accepts 'mysql', 'timestamp', or PHP date format string (e.g. 'Y-m-d').
