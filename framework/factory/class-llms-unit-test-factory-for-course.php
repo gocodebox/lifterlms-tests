@@ -27,12 +27,18 @@ class LLMS_Unit_Test_Factory_For_Course extends WP_UnitTest_Factory_For_Post {
 	}
 
 	public function create_object( $args ) {
+
+		add_filter( 'llms_generator_is_image_sideloading_enabled', '__return_false' );
+
 		$gen = new LLMS_Generator( array(
 			'courses' => array( $this->get_structure( $args ) )
 		) );
 		$gen->set_generator( 'LifterLMS/BulkCourseGenerator' );
 		$gen->set_default_post_status( $args['status'] );
 		$gen->generate();
+
+		remove_filter( 'llms_generator_is_image_sideloading_enabled', '__return_false' );
+
 		return $gen->get_generated_courses()[0];
 	}
 
