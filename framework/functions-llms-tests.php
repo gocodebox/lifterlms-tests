@@ -37,6 +37,34 @@ function llms_tests_mock_current_time( $time ) {
 }
 
 /**
+ * Mock the WP_Screen object
+ *
+ * @since 1.13.0
+ *
+ * @param string $id Screen ID.
+ * @return void
+ */
+function llms_tests_mock_current_screen( $id ) {
+	set_current_screen( $id );
+}
+
+/**
+ * Reset the WP_Screen object
+ *
+ * I can't find anything officially documenting the proper way to do this but this line seems to indicate
+ * you can reset it by using `front` as the current screen, see link below.
+ *
+ * @since 1.13.0
+ *
+ * @link https://core.trac.wordpress.org/browser/tags/5.4/src/wp-admin/includes/class-wp-screen.php#L277
+ *
+ * @return [type] [description]
+ */
+function llms_tests_reset_current_screen() {
+	set_current_screen( 'front' );
+}
+
+/**
  * Reset current time after mocking it
  * @return   void
  * @since    1.2.0
