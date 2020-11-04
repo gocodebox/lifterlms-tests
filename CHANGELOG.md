@@ -1,6 +1,13 @@
 LifterLMS Tests Changelog
 =========================
 
+v1.13.0 - 2020-11-04
+--------------------
+
++ Added methods for mocking `WP_Screen`: `llms_tests_mock_current_screen( $id )` & `llms_tests_reset_current_screen()`.
++ Fixed an issue encountered during asset registration assertions when the `$wp_styles` or `$wp_scripts` global had not yet been instantiated.
+
+
 v1.12.2 - 2020-05-13
 --------------------
 
