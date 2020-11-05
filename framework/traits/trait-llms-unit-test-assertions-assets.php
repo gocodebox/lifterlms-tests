@@ -9,7 +9,8 @@ trait LLMS_Unit_Test_Assertions_Assets {
 	/**
 	 * Retrieve the WP core global variable based on the asset type
 	 *
-	 * @since  1.8.0
+	 * @since 1.8.0
+	 * @since 1.13.0 Use global initializer functions in favor the direct globals to ensure the return is `null`.
 	 *
 	 * @param  string $type Asset type (script or style).
 	 * @return obj|null
@@ -17,11 +18,9 @@ trait LLMS_Unit_Test_Assertions_Assets {
 	private function get_asset_global_obj( $type ) {
 
 		if ( 'script' === $type ) {
-			global $wp_scripts;
-			return $wp_scripts;
+			return wp_scripts();
 		} elseif ( 'style' === $type ) {
-			global $wp_styles;
-			return $wp_styles;
+			return wp_styles();
 		} else {
 			$this->markTestSkipped( "Asset type '{$type}' does not exit." );
 		}
@@ -31,7 +30,7 @@ trait LLMS_Unit_Test_Assertions_Assets {
 	/**
 	 * Assert that a script or style is registered with WordPress
 	 *
-	 * @since  1.8.0
+	 * @since 1.8.0
 	 *
 	 * @param  string $type   Asset type (script or style)
 	 * @param  string $handle Asset handle/id.
@@ -46,7 +45,7 @@ trait LLMS_Unit_Test_Assertions_Assets {
 	/**
 	 * Assert that a script or style is not registered with WordPress
 	 *
-	 * @since  1.8.0
+	 * @since 1.8.0
 	 *
 	 * @param  string $type   Asset type (script or style)
 	 * @param  string $handle Asset handle/id.
@@ -61,7 +60,7 @@ trait LLMS_Unit_Test_Assertions_Assets {
 	/**
 	 * Assert that a script or style is enqueued with WordPress
 	 *
-	 * @since  1.8.0
+	 * @since 1.8.0
 	 *
 	 * @param  string $type   Asset type (script or style)
 	 * @param  string $handle Asset handle/id.
@@ -76,7 +75,7 @@ trait LLMS_Unit_Test_Assertions_Assets {
 	/**
 	 * Assert that a script or style is not enqueued with WordPress
 	 *
-	 * @since  1.8.0
+	 * @since 1.8.0
 	 *
 	 * @param  string $type   Asset type (script or style)
 	 * @param  string $handle Asset handle/id.
