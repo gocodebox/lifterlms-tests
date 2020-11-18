@@ -252,10 +252,17 @@ function run {
 		# Clone from a git repo.
 		elif [ -1 != $(strindex "$SLUG_OR_ZIP" ".git") ]; then
 
+			REPO_BRANCH=""
+			if [ -1 != $(strindex "$SLUG_OR_ZIP" ".git@") ]; then
+				REPO_BRANCH=${SLUG_OR_ZIP#*@}
+				SLUG_OR_ZIP=${SLUG_OR_ZIP%"@$REPO_BRANCH"}
+				REPO_BRANCH="-b $REPO_BRANCH"
+			fi
 			SLUG=$(basename ${SLUG_OR_ZIP} .${SLUG_OR_ZIP##*.})
-			PLUGIN_DIR=$WP_CORE_DIR/wp-content/plugins/$SLUG
+			PLUGIN_DIR="$WP_CORE_DIR"wp-content/plugins/$SLUG
 			rm -rf $PLUGIN_DIR
-			git clone $SLUG_OR_ZIP $PLUGIN_DIR
+
+			git clone $REPO_BRANCH $SLUG_OR_ZIP $PLUGIN_DIR
 
 			# if the plugin has a composer.json file, install deps.
 			if [ -f $PLUGIN_DIR/composer.json ]; then
