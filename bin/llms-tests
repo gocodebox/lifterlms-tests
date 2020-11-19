@@ -40,14 +40,12 @@ function strindex {
 # $3 = DB_PASS
 # $4 = DB_EXTRA (host, protocol, etc...)
 function db_exists {
-
 	EXISTS=$( mysql --user="$2" --password="$3" $4 --skip-column-names -e "SHOW DATABASES LIKE '$1';" | grep "$1" )
 	if [[ $EXISTS = $DB_NAME ]]; then
 		echo true
 	else
 		echo false
 	fi
-
 }
 
 function run {
@@ -263,7 +261,6 @@ function run {
 		for file in $( find $PHPUNIT_REAL_DIR -type f -name "*~" ); do
 			mv $file ${file%?}
 		done
-
 
 	elif [ $COMMAND == "plugin" ]; then
 
