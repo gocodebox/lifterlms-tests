@@ -8,6 +8,9 @@ TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
 WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
 WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 
+PHPUNIT_PATCH_DIR=$WP_TESTS_DIR/includes/phpunit7/MockObject
+PHPUNIT_REAL_DIR="./vendor/phpunit/phpunit/src/Framework"
+
 mkdir -p $TMPDIR
 
 download() {
@@ -32,7 +35,20 @@ function strindex {
   [[ "$x" = "$1" ]] && echo -1 || echo "${#x}"
 }
 
+# $1 = DB_Name
+# $2 = DB_USER
+# $3 = DB_PASS
+# $4 = DB_EXTRA (host, protocol, etc...)
+function db_exists {
 
+	EXISTS=$( mysql --user="$2" --password="$3" $4 --skip-column-names -e "SHOW DATABASES LIKE '$1';" | grep "$1" )
+	if [[ $EXISTS = $DB_NAME ]]; then
+		echo true
+	else
+		echo false
+	fi
+
+}
 
 function run {
 
@@ -136,6 +152,7 @@ function run {
 		}
 
 		install_test_suite() {
+
 			# portable in-place argument for both GNU sed and Mac OSX sed
 			if [[ $(uname -s) == 'Darwin' ]]; then
 				local ioption='-i.bak'
@@ -163,6 +180,11 @@ function run {
 				printf "\ndefine( 'FS_METHOD', 'direct' );\n" >> "$WP_TESTS_DIR"/wp-tests-config.php
 			fi
 
+			# Move phpunit patch files into the phpunit directory.
+			if [ -d $PHPUNIT_PATCH_DIR ]; then
+				cp -br $PHPUNIT_PATCH_DIR $PHPUNIT_REAL_DIR
+			fi
+
 		}
 
 		install_db() {
@@ -187,8 +209,11 @@ function run {
 				fi
 			fi
 
-			# create database
-			mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
+			# Create database if it doesn't already exist.
+			if [ false = $( db_exists $DB_NAME "$DB_USER" "$DB_PASS" $EXTRA ) ]; then
+				mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
+			fi;
+
 		}
 
 		install_wp
@@ -225,14 +250,20 @@ function run {
 				fi
 			fi
 
-			# create database
-			mysqladmin drop -f $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
+			if [ true = $( db_exists $DB_NAME "$DB_USER" "$DB_PASS" $EXTRA ) ]; then
+				mysqladmin drop -f $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
+			fi
 
 		}
 
+		rm -rf $TMPDIR
 		delete_db
 
-		rm -rf $TMPDIR
+		# Restore original PHPUNIT Files.
+		for file in $( find $PHPUNIT_REAL_DIR -type f -name "*~" ); do
+			mv $file ${file%?}
+		done
+
 
 	elif [ $COMMAND == "plugin" ]; then
 
