@@ -9,6 +9,13 @@
 class LLMS_Tests_Bootstrap {
 
 	/**
+	 * Path to the test assets directory
+	 *
+	 * @var string
+	 */
+	public $assets_dir;
+
+	/**
 	 * __FILE__ reference, should be defined in the extending class
 	 * @var [type]
 	 */
@@ -70,6 +77,7 @@ class LLMS_Tests_Bootstrap {
 		$this->tests_dir    = dirname( $this->file );
 		$this->plugin_dir   = getcwd();
 		$this->wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : 'tmp/tests/wordpress-tests-lib';
+		$this->assets_dir   = $this->tests_dir . '/assets';
 
 		// load test function so tests_add_filter() is available
 		require_once $this->wp_tests_dir . '/includes/functions.php';
@@ -93,6 +101,10 @@ class LLMS_Tests_Bootstrap {
 
 		// Load any includes.
 		$this->includes();
+
+		// Expose the bootstrap class.
+		global $_llms_tests_bootstrap;
+		$_llms_tests_bootstrap = $this;
 
 	}
 
