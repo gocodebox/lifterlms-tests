@@ -321,7 +321,7 @@ function run {
 		# If we have a zip file unzip it.
 		if [ ! -z $ZIP ]; then
 			echo $ZIP
-			unzip -q $ZIP -d $WP_CORE_DIR/wp-content/plugins/
+			unzip -qo $ZIP -d $WP_CORE_DIR/wp-content/plugins/
 		fi
 
 	else
