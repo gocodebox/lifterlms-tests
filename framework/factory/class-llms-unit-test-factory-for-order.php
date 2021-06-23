@@ -27,6 +27,10 @@ class LLMS_Unit_Test_Factory_For_Order extends WP_UnitTest_Factory_For_Post {
 
 	public function create_object( $args ) {
 
+		if ( class_exists( 'LLMS_Forms' ) ) {
+			LLMS_Forms::instance()->install();
+		}
+
 		$cust_id = false;
 		if ( is_numeric( $args['customer'] ) ) {
 			$cust_id = $args['customer'];
