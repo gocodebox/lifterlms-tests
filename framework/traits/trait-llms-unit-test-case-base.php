@@ -2,7 +2,7 @@
 /**
  * Mock Request methods
  * @since 1.5.0
- * @version 1.8.0
+ * @version 1.14.0
  */
 
 include_once 'trait-llms-unit-test-mock-requests.php';
@@ -14,6 +14,7 @@ include_once 'trait-llms-unit-test-mock-requests.php';
  * @since 1.7.0 Add `$cookies` property providing access to the instance of `LLMS_Tests_Cookies` class.
  * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
  * @since 1.8.0 Added asset assertions.
+ * @since 1.14.0 Added logs.
  */
 trait LLMS_Unit_Test_Case_Base {
 
@@ -36,10 +37,16 @@ trait LLMS_Unit_Test_Case_Base {
 	protected $factory;
 
 	/**
+	 * @var LLMS_Unit_Test_Logs
+	 */
+	protected $logs;
+
+	/**
 	 * Setup the test case.
 	 *
 	 * @since 1.6.0
 	 * @since 1.7.0 Initailize the `$cookies` property.
+	 * @since 1.14.0 Add access to logs class.
 	 *
 	 * @return void
 	 */
@@ -48,6 +55,7 @@ trait LLMS_Unit_Test_Case_Base {
 		parent::setUp();
 		$this->cookies = LLMS_Tests_Cookies::instance();
 		$this->factory = new LLMS_Unit_Test_Factory();
+		$this->logs    = new LLMS_Tests_Logs();
 
 	}
 
@@ -121,6 +129,7 @@ trait LLMS_Unit_Test_Case_Base {
 	 * @since 1.5.0
 	 * @since 1.7.0 Unset all cookies set by LLMS_Tests_Cookies and reset the expected response of all cookie sets to `true`.
 	 * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
+	 * @since 1.14.0 Clear logs.
 	 *
 	 * @return void
 	 */
@@ -142,6 +151,9 @@ trait LLMS_Unit_Test_Case_Base {
 
 		// Clearing REQUEST_URI is necessary after running tests that utilize $this->go_to().
 		$_SERVER['REQUEST_URI'] = '';
+
+		// Stop logging & clear logs.
+		$this->logs->tear_down();
 
 	}
 
