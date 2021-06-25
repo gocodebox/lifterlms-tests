@@ -73,6 +73,7 @@ if [[ "help" == $COMMAND || "--help" == $COMMAND || "-h" == $COMMAND ]]; then
 	echo "   rm:      Remove containers and volumes"
 	echo "   ssh:     Open an interactive bash session with the PHP service container"
 	echo "   stop:    Stop containers without removing them"
+	echo "   version: Change the WordPress core version"
 	echo "   wp:      Execute a wp-cli command inside the PHP service container"
 
 elif [ "config" == $COMMAND ]; then
@@ -217,6 +218,28 @@ elif [ "ssh" == $COMMAND ]; then
 		output_help "ssh" "$0 ssh [-h | --help]" "Opens an interactive bash session with the PHP service container" "$HELP_OPTIONS_HELP"
 	else
 		docker exec -it $($0 ps -q wordpress) /bin/bash
+	fi
+
+elif [ "version" == $COMMAND ]; then
+
+	if [[ "-h" == $2 || "--help" == $2 ]]; then
+		output_help "version" "$0 version <version>" "Changes the WordPress core to the specified version. Accepts latest, nightly, or a major.minor version." "$HELP_OPTIONS_HELP"
+	else
+
+		if [ "nightly" == $2 ]; then
+			DOWNLOAD=https://wordpress.org/nightly-builds/wordpress-latest.zip
+		elif [ "latest" == $2 ]; then
+			DOWNLOAD=https://downloads.wordpress.org/release/wordpress-latest.zip
+		else
+			LIST=$( curl -s https://api.wordpress.org/core/version-check/1.7/?version=$2 )
+			DOWNLOAD=$( node -e "var list = JSON.parse( '$LIST' ).offers; console.log( list[ list.length - 1 ].download );" )
+		fi
+
+		$0 wp core update $DOWNLOAD --force
+		$0 wp core update-db
+		INSTALLED=$( $0 wp core version )
+		echo Version changed to: $INSTALLED
+
 	fi
 
 elif [ "wp" == $COMMAND ]; then
