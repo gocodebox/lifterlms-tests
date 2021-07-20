@@ -19,7 +19,7 @@
     "bin/llms-tests",
     "bin/llms-env"
   ],
-  "autoload-dev": {
+  "autoload": {
     "psr-4": {
       "LifterLMS\\Tests\\": "src/"
     }

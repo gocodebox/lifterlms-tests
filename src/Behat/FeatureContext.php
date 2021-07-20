@@ -47,6 +47,35 @@ class FeatureContext extends WP_CLI_FeatureContext {
 	 */
 	private $scenario;
 
+	private $db_defaults = array(
+		'TESTS_DB_NAME' => 'llms_cli_tests',
+		'TESTS_DB_USER' => 'root',
+		'TESTS_DB_PASS' => 'password',
+		'TESTS_DB_HOST' => '127.0.01',
+	);
+
+	public function __construct() {
+
+		$vars = array(
+			'TESTS_DB_NAME' => 'WP_CLI_TEST_DBNAME',
+			'TESTS_DB_USER' => 'WP_CLI_TEST_DBUSER',
+			'TESTS_DB_PASS' => 'WP_CLI_TEST_DBPASS',
+			'TESTS_DB_HOST' => 'WP_CLI_TEST_DBHOST',
+		);
+
+		foreach ( $vars as $var => $wpcli_var ) {
+			$val       = getenv( $var );
+			$wpcli_val = getenv( $wpcli_var );
+			if ( ! $wpcli_val ) {
+				$val = $val ? $val : $this->db_defaults[ $var ];
+				putenv( "$wpcli_var=$val" );
+			}
+		}
+
+		parent::__construct();
+
+	}
+
 	/**
 	 * @BeforeFeature
 	 */

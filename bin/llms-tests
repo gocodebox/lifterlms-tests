@@ -218,6 +218,10 @@ function run {
 		install_test_suite
 		install_db
 
+	elif [ $COMMAND == "install-cli" ]; then
+
+		WP_CLI_TEST_DBNAME=$2 WP_CLI_TEST_DBUSER=$3 WP_CLI_TEST_DBROOTUSER=$3 WP_CLI_TEST_DBPASS=$4 WP_CLI_TEST_DBROOTPASS=$4 WP_CLI_TEST_DBHOST=$5 install-package-tests
+
 	elif [ $COMMAND == "teardown" ]; then
 
 		if [ $# -lt 4 ]; then
