@@ -5,7 +5,7 @@
  * @package LifterLMS/Tests/Behat
  *
  * @since 2.0.0
- * @version 2.0.0
+ * @version 2.0.1
  */
 
 namespace LifterLMS\Tests\Behat;
@@ -73,6 +73,15 @@ class FeatureContext extends WP_CLI_FeatureContext {
 		}
 
 		parent::__construct();
+
+		// Load custom environment vars.
+		$envfile = dirname( self::get_vendor_dir() ) . '/.behatenv';
+		if ( file_exists( $envfile ) ) {
+			$json = json_decode( file_get_contents( $envfile ), true );
+			foreach ( $json as $key => $val ) {
+				putenv( "{$key}={$val}" );
+			}
+		}
 
 	}
 
