@@ -5,7 +5,7 @@
  * @package LifterLMS/Tests/Behat
  *
  * @since 2.0.0
- * @version 2.0.0
+ * @version 2.0.1
  */
 namespace LifterLMS\Tests\Behat;
 
@@ -36,6 +36,18 @@ trait GivenStepDefinitions {
 
 		// Activate the CLI plugin.
 		$this->proc( 'wp plugin activate lifterlms-cli' )->run_check();
+
+	}
+
+	/**
+	 * @Given the LifterLMS Add-on :addon is installed
+	 *
+	 * @since 2.0.1
+	 */
+	public function given_the_lifterlms_addon_x_is_installed( $addon ) {
+
+		$key = getenv( 'LLMS_CLI_TEST_KEY_INFINITY' );
+		$this->proc( "wp llms addon install {$addon} --activate --key={$key}" )->run_check();
 
 	}
 

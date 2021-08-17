@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v2.0.1 - 2021-08-17
+-------------------
+
++ Add behat `@given` step definition to install LifterLMS add-ons.
+
+
 v2.0.0 - 2021-07-20
 -------------------
 
