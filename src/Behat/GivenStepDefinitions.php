@@ -5,7 +5,7 @@
  * @package LifterLMS/Tests/Behat
  *
  * @since 2.0.0
- * @version 2.0.1
+ * @version 2.0.2
  */
 namespace LifterLMS\Tests\Behat;
 
@@ -40,14 +40,22 @@ trait GivenStepDefinitions {
 	}
 
 	/**
-	 * @Given the LifterLMS Add-on :addon is installed
+	 * @Given /^the LifterLMS Add-on "([^"]*)" is (installed|activated)$/
 	 *
 	 * @since 2.0.1
+	 * @since 2.0.2 Add option to install or activate.
+	 *
+	 * @param string $addon Add-on slug.
+	 * @param string $mode  Command mode, accepts "installed" or "activated". When passing "activated" the
+	 *                      add-on will be installed and then activated.
+	 * @return void
 	 */
-	public function given_the_lifterlms_addon_x_is_installed( $addon ) {
+	public function given_the_lifterlms_addon_x_is_installed( $addon, $mode ) {
+
+		$activate = 'installed' === $mode ? '' : ' --activate';
 
 		$key = getenv( 'LLMS_CLI_TEST_KEY_INFINITY' );
-		$this->proc( "wp llms addon install {$addon} --activate --key={$key}" )->run_check();
+		$this->proc( "wp llms addon install {$addon} --key={$key}{$activate}" )->run_check();
 
 	}
 
