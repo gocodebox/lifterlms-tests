@@ -81,16 +81,17 @@ class LLMS_Unit_Test_Util {
 	 * Get the value of a private property.
 	 *
 	 * @since 1.11.0
+	 * @since [version] Add ability to get values from static properties.
 	 *
-	 * @param object $obj Object.
-	 * @param string $name Property name.
+	 * @param object|string $obj  Object. String is allowed if the property is static.
+	 * @param string        $name Property name.
 	 * @return mixed
 	 */
 	public static function get_private_property_value( $obj, $name ) {
 
 		$prop = self::get_private_property( $obj, $name );
 		$prop->setAccessible( true );
-		return $prop->getValue( $obj );
+		return $prop->isStatic() ? $prop->getValue() : $prop->getValue( $obj );
 
 	}
 
