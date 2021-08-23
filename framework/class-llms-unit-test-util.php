@@ -81,7 +81,7 @@ class LLMS_Unit_Test_Util {
 	 * Get the value of a private property.
 	 *
 	 * @since 1.11.0
-	 * @since [version] Add ability to get values from static properties.
+	 * @since 2.0.2 Add ability to get values from static properties.
 	 *
 	 * @param object|string $obj  Object. String is allowed if the property is static.
 	 * @param string        $name Property name.

@@ -115,8 +115,6 @@ function llms_setcookie( $name, $value = '', $expires = 0, $path = '', $domain =
  * @param   int    $filter         The ID of the filter to apply.
  * @param   mixed  $options        Associative array of options or bitwise disjunction of flags. If filter accepts options, flags can be provided in "flags" field of array.
  * @return  Value of the requested variable on success, FALSE if the filter fails, or NULL if the variable_name variable is not set. If the flag FILTER_NULL_ON_FAILURE is used, it returns FALSE if the variable is not set and NULL if the filter fails.
- * @since   [version]
- * @version [version]
  */
 function llms_filter_input( $type, $variable_name, $filter = FILTER_DEFAULT, $options = array() ) {
 

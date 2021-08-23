@@ -2,14 +2,14 @@
 /**
  * File management
  *
- * @since [version]
+ * @since Unknown
  */
 class LLMS_Unit_Test_Files {
 
 	/**
 	 * Copy a file in the tests assets directory to a new directory.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param string $file     Asset filename to be copied.
 	 * @param string $dest     Path to the directory where the file should be stored.
@@ -23,7 +23,7 @@ class LLMS_Unit_Test_Files {
 	/**
 	 * Copy a file to a location
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param string $file     Full path to the original file to be copied.
 	 * @param string $dest     Path to the directory where the file should be stored.
@@ -55,7 +55,7 @@ class LLMS_Unit_Test_Files {
 	/**
 	 * Retrieve the full path to the tests assets directory.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @return string
 	 */
@@ -69,7 +69,7 @@ class LLMS_Unit_Test_Files {
 	/**
 	 * Get the full path to an asset in the tests asset directory.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param string $filename The filename of a file in the tests asset directory.
 	 * @return string
@@ -81,7 +81,7 @@ class LLMS_Unit_Test_Files {
 	/**
 	 * Delete a file.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param string $file Pull path to the file to delete.
 	 * @return void
