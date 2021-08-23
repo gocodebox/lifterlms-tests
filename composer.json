@@ -23,5 +23,10 @@
     "psr-4": {
       "LifterLMS\\Tests\\": "src/"
     }
+  },
+  "extra": {
+    "llms": {
+      "version": "2.0.2"
+    }
   }
 }
