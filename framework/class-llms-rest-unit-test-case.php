@@ -7,8 +7,8 @@
 class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 
 	use LLMS_Unit_Test_Case_Base {
-		set_up as base_set_up;
-		tear_down as base_tear_down;
+		setUp as baseSetUp;
+		tearDown as baseTearDown;
 	}
 	use LLMS_Unit_Test_Assertions_REST_Responses;
 
@@ -28,9 +28,9 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function set_up() {
+	public function setUp() {
 
-		$this::base_set_up();
+		$this::baseSetUp();
 		do_action( 'rest_api_init' );
 		$this->server = rest_get_server();
 
@@ -43,9 +43,9 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	 *
 	 * @return  void
 	 */
-	public function tear_down() {
+	public function tearDown() {
 
-		$this::base_tear_down();
+		$this::baseTearDown();
 
 		global $wp_rest_server;
 		unset( $this->server );

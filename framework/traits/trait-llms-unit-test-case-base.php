@@ -47,13 +47,12 @@ trait LLMS_Unit_Test_Case_Base {
 	 * @since 1.6.0
 	 * @since 1.7.0 Initailize the `$cookies` property.
 	 * @since 1.14.0 Add access to logs class.
-	 * @since 2.0.0 Renamed & use set_up() in favor of setUp().
 	 *
 	 * @return void
 	 */
-	public function set_up() {
+	public function setUp() {
 
-		parent::set_up();
+		parent::setUp();
 		$this->cookies = LLMS_Tests_Cookies::instance();
 		$this->factory = new LLMS_Unit_Test_Factory();
 		$this->logs    = new LLMS_Tests_Logs();
@@ -131,13 +130,12 @@ trait LLMS_Unit_Test_Case_Base {
 	 * @since 1.7.0 Unset all cookies set by LLMS_Tests_Cookies and reset the expected response of all cookie sets to `true`.
 	 * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
 	 * @since 1.14.0 Clear logs.
- 	 * @since 2.0.0 Renamed & use tear_down() in favor of tearDown().
 	 *
 	 * @return void
 	 */
-	public function tear_down() {
+	public function tearDown() {
 
-		parent::tear_down();
+		parent::tearDown();
 
 		// Reset mocked data.
 		llms_tests_reset_current_time();
