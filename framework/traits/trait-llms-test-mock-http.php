@@ -31,7 +31,7 @@ trait LLMS_Unit_Test_Mock_Http {
 	/**
 	 * Setup mock http request data.
 	 *
-	 * @since [version]
+	 * @since 1.5.0
 	 *
 	 * @param string $url_to_mock The URL to mock.
 	 * @param array|obj|WP_Error $mock_return The mock data to respond with.

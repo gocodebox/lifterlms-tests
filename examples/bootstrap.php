@@ -3,8 +3,6 @@
  * LifterLMS Add-On Testing Bootstrap
  *
  * @package LifterLMS_Add_On/Tests
- * @since   [version]
- * @version [version]
  */
 
 require_once './vendor/lifterlms/lifterlms-tests/bootstrap.php';

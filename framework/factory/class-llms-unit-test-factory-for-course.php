@@ -50,8 +50,6 @@ class LLMS_Unit_Test_Factory_For_Course extends WP_UnitTest_Factory_For_Post {
 	 * Retrieve the structure of a course for use in a LLMS Generator
 	 * @param   array    $args creation args.
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
 	 */
 	public function get_structure( $args ) {
 

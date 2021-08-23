@@ -2,14 +2,14 @@
 /**
  * Assertions related to checking for WP_REST_Response objects
  *
- * @since [version]
+ * @since Unknown
  */
 trait LLMS_Unit_Test_Assertions_REST_Responses {
 
 	/**
 	 * Assert a WP_REST_Response code equals an expected code.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param string           $expected Expected response code.
 	 * @param WP_REST_Response $response Response object.
@@ -25,7 +25,7 @@ trait LLMS_Unit_Test_Assertions_REST_Responses {
 	/**
 	 * Assert a WP_REST_Response message equals an expected message.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param int              $expected Expected response message.
 	 * @param WP_REST_Response $response Response object.
@@ -41,7 +41,7 @@ trait LLMS_Unit_Test_Assertions_REST_Responses {
 	/**
 	 * Assert a WP_REST_Response status code equals an expected status code.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param int              $expected Expected response http status code.
 	 * @param WP_REST_Response $response Response object.

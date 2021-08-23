@@ -2,7 +2,7 @@
 /**
  * Base test case for all tests
  *
- * @since [version]
+ * @since Unknown
  */
 class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 
@@ -24,7 +24,7 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	/**
 	 * Setup the test case
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @return void
 	 */
@@ -39,7 +39,7 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	/**
 	 * Unset the server.
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @return  void
 	 */
@@ -57,7 +57,7 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	/**
 	 * Preform a mock WP_REST_Request
 	 *
-	 * @since [version]
+	 * @since Unknown
 	 *
 	 * @param string $method Request method.
 	 * @param string $route  Request route, eg: '/llms/v1/courses'.

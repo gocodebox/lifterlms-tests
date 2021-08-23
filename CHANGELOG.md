@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v2.0.2 - 2021-08-23
+-------------------
+
++ Bugfix: Fixed static property retrieval via `LLMS_Unit_Test_Utils::get_private_property_value()`.
+
+
 v2.0.1 - 2021-08-17
 -------------------
 
