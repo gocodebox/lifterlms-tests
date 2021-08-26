@@ -162,6 +162,20 @@ function llms_filter_input( $type, $variable_name, $filter = FILTER_DEFAULT, $op
 }
 
 /**
+ * Plugs the llms_exit() function to throw an exit exception instead of exiting
+ *
+ * @since [version]
+ *
+ * @param string|int $status Exit status.
+ * @return void
+ *
+ * @throws LLMS_Unit_Test_Exception_Exit
+ */
+function llms_exit( $status = null ) {
+	throw new LLMS_Unit_Test_Exception_Exit( $status );
+}
+
+/**
  * Plug llms_redirect_and_exit() to throw a redirect exception instead of redirecting and exiting
  *
  * @since Unknown
@@ -172,7 +186,9 @@ function llms_filter_input( $type, $variable_name, $filter = FILTER_DEFAULT, $op
  *     @type bool $safe   If true, use `wp_safe_redirect()` otherwise use `wp_redirect()` [default: true].
  *
  * }
- * @return   void
+ * @return void
+ *
+ * @throws LLMS_Unit_Test_Exception_Redirect
  */
 function llms_redirect_and_exit( $location, $options = array() ) {
 	$options = wp_parse_args( $options, array(
