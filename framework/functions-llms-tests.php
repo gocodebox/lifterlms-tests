@@ -164,7 +164,7 @@ function llms_filter_input( $type, $variable_name, $filter = FILTER_DEFAULT, $op
 /**
  * Plugs the llms_exit() function to throw an exit exception instead of exiting
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param string|int $status Exit status.
  * @return void

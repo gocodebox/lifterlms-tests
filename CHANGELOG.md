@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v2.1.0 - 2021-08-26
+-------------------
+
++ Introduced pluggable version of `llms_exit()` which throws the `LLMS_Unit_Test_Exception_Exit` exception in favor of exiting.
+
+
 v2.0.2 - 2021-08-23
 -------------------
 

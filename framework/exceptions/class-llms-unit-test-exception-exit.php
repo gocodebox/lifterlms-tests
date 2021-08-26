@@ -30,7 +30,7 @@ class LLMS_Unit_Test_Exception_Exit extends Exception {
 	 * This is a wrapper around getMessage() implemented since it makes sense to retrieve the exit status
 	 * from `get_status()` in favor of `getMessage()`, right?
 	 *
-	 * @since [version]
+	 * @since 2.1.0
 	 *
 	 * @return string
 	 */
