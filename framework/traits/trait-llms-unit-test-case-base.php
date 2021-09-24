@@ -50,9 +50,9 @@ trait LLMS_Unit_Test_Case_Base {
 	 *
 	 * @return void
 	 */
-	public function setUp() {
+	public function set_up() {
 
-		parent::setUp();
+		parent::set_up();
 		$this->cookies = LLMS_Tests_Cookies::instance();
 		$this->factory = new LLMS_Unit_Test_Factory();
 		$this->logs    = new LLMS_Tests_Logs();
@@ -133,9 +133,9 @@ trait LLMS_Unit_Test_Case_Base {
 	 *
 	 * @return void
 	 */
-	public function tearDown() {
+	public function tear_down() {
 
-		parent::tearDown();
+		parent::tear_down();
 
 		// Reset mocked data.
 		llms_tests_reset_current_time();
