@@ -6,6 +6,9 @@
  * @since Use `getcwd()` to set the `$plugin_dir` variable.
  * @version 1.6.1
  */
+
+require './vendor/yoast/phpunit-polyfills/phpunitpolyfills-autoload.php';
+
 class LLMS_Tests_Bootstrap {
 
 	/**
