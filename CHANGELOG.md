@@ -1,6 +1,16 @@
 LifterLMS Tests Changelog
 =========================
 
+v3.0.0 - 2021-09-27
+-------------------
+
++ Updated to rely on `yoast/phpunit-polyfills`.
++ Renamed method `LLMS_Unit_Test_Case_Base::setUp()` to `LLMS_Unit_Test_Case_Base::set_up()` for WP core compat.
++ Renamed method `LLMS_Unit_Test_Case_Base::tearDown()` to `LLMS_Unit_Test_Case_Base::tear_down()` for WP core compat.
++ Renamed method `LLMS_REST_Unit_Test_Case::setUp()` to `LLMS_REST_Unit_Test_Case::set_up()` for WP core compat.
++ Renamed method `LLMS_REST_Unit_Test_Case::tearDown()` to `LLMS_REST_Unit_Test_Case::tear_down()` for WP core compat.
+
+
 v2.1.0 - 2021-08-26
 -------------------
 

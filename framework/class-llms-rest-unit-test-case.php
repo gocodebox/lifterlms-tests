@@ -25,6 +25,7 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	 * Setup the test case
 	 *
 	 * @since Unknown
+	 * @since 3.0.0 Renamed from `setUp()` for WP core compat.
 	 *
 	 * @return void
 	 */
@@ -40,8 +41,9 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	 * Unset the server.
 	 *
 	 * @since Unknown
+	 * @since 3.0.0 Renamed from `tearDown()` for WP core compat.
 	 *
-	 * @return  void
+	 * @return void
 	 */
 	public function tear_down() {
 
