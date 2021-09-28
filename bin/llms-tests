@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-COMMAND=${1-invalid}
+COMMAND=${1-help}
 
 TMPDIR=./tmp/tests
 TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
 
-WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
-WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
-
-PHPUNIT_PATCH_DIR=$WP_TESTS_DIR/includes/phpunit7/MockObject
-PHPUNIT_REAL_DIR="./vendor/phpunit/phpunit/src/Framework"
-
 mkdir -p $TMPDIR
 
+WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
+WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
+
+# Download a remote file to a specified location
+## $1 remote file url
+## $2 local path where the file should be downloaded to
 download() {
 	if [ `which curl` ]; then
 		curl -s -L "$1" > "$2";
@@ -20,6 +20,217 @@ download() {
 		wget -nv -O "$2" "$1"
 	fi
 }
+
+# Helper to output help text when running a command with -h or --help
+function output_help() {
+	echo "NAME"
+	echo "   $1"
+	echo ""
+	echo "SYNOPSIS"
+	echo "   $2"
+	echo ""
+	echo "DESCRIPTION"
+	echo "   $3"
+	echo ""
+	echo "OPTIONS"
+	echo "$4"
+}
+
+function output_arg_info() {
+	echo "   $1"
+	echo "      $2"
+}
+
+function output_help_arg_info() {
+	output_arg_info "-h, --help" "Display this help message."
+}
+
+parse_version_string() {
+
+	VER=$1
+
+	if [[ "latest" == $VER ]]; then
+
+		JSON=$TMPDIR/wp-latest.json
+		download https://api.wordpress.org/core/version-check/1.7/ $JSON
+		VER=$( cat $JSON | jq -r '.offers[0].version' )
+
+	elif [[ "nightly" == $VER || "trunk" == $VER ]]; then
+		VER="master"
+	fi
+
+	# EG: 5.8, 5.9, etc...
+	if [[ $VER =~ ^[0-9]+\.[0-9]+$ ]]; then
+		VER=$VER
+
+	# EG 5.8.0, 5.8.1, etc...
+	elif [[ $VER =~ [0-9]+\.[0-9]+\.[0-9]+ ]]; then
+		VER="${VER%??}"
+
+	fi
+
+	echo $VER
+
+}
+
+# General help command, invoked with llms-env help or --help or -h
+if [[ "help" == $COMMAND || "--help" == $COMMAND || "-h" == $COMMAND ]]; then
+
+	echo "Usage: $0 [-h | --help] <command> [<args>]"
+	echo ""
+	echo "Description:"
+	echo "   Install and configure the local phpunit testing environment."
+	echo ""
+	echo "Available commands:"
+	echo "   install: Install WordPress and related test files"
+	echo "   help:    Show command usage and help information"
+
+elif [ "install" == $COMMAND ]; then
+
+	if [[ "-h" == $2 || "--help" == $2 ]]; then
+
+		HELP=$( output_arg_info "--name=<name>" "Specify the database name. Defaults to 'llms_tests' if not specified." )
+		HELP=$HELP$'\n\n'$( output_arg_info "--user=<username>" "Specify the database username. Defaults to 'root' if not specified." )
+		HELP=$HELP$'\n\n'$( output_arg_info "--pass=<password>" "Specify the database password. Defaults to 'password' if not specified." )
+		HELP=$HELP$'\n\n'$( output_arg_info "--host=<host>" "Specify the database host. Defaults to '127.0.0.1' if not specified." )
+		HELP=$HELP$'\n\n'$( output_arg_info "--wp-version=<version>" "Specify the WP Core version number. Defaults to 'latest' if not specified." )
+		HELP=$HELP$'\n\n'$( output_arg_info "--tests-version=<version>" "Specify the WP Tests library version number. Defaults to 'latest' if not specified." )
+		HELP=$HELP$'\n\n'$( output_arg_info "--reinstall" "Reinstall files if they already exist." )
+		HELP=$HELP$'\n\n'$( output_help_arg_info )
+
+		output_help "install" "$0 install [--name=<name>] [--user=<username>] [--pass=<password>] [--host=<host>]"$'\n'"                                   [--wp-version=<version>] [--tests-version=<version>] [-h | --help]" "Install WordPress and related test files." "$HELP"
+
+	else
+
+		NAME="llms_tests"
+		USER="root"
+		PASS="password"
+		HOST="127.0.0.1"
+		WP_VERSION="latest"
+		TESTS_VERSION="latest"
+		REINSTALL=0
+
+		for i in "$@"; do
+			case $i in
+				--name=*)
+					NAME="${i#*=}"
+					shift
+					;;
+				--user=*)
+					USER="${i#*=}"
+					shift
+					;;
+				--pass=*)
+					PASS="${i#*=}"
+					shift
+					;;
+				--host=*)
+					HOST="${i#*=}"
+					shift
+					;;
+				--wp-version=*)
+					WP_VERSION="${i#*=}"
+					shift
+					;;
+				--tests-version=*)
+					TESTS_VERSION="${i#*=}"
+					shift
+					;;
+				--reinstall)
+					REINSTALL=1
+					shift
+					;;
+				*)
+					# unknown option
+					;;
+			esac
+		done
+
+
+		# Download the WP Core files & setup the config file.
+		if [[ ! -d $WP_CORE_DIR || 1 == $REINSTALL ]]; then
+			wp core download --version="$WP_VERSION" --path="$WP_CORE_DIR" --force
+
+			# Create config file, mimicking this file: https://github.com/WordPress/wordpress-develop/blob/master/wp-tests-config-sample.php
+			wp config create --path="$WP_CORE_DIR" --dbname="$NAME" --dbuser="$USER" --dbpass="$PASS" --dbhost="$HOST" --force
+
+			# Hardcode the path because the file is going to move.
+			wp config set --path="$WP_CORE_DIR" "ABSPATH" "$WP_CORE_DIR"
+
+			# Add custom data from the WP core test file.
+			wp config set --path="$WP_CORE_DIR" "FS_METHOD" "direct"
+			wp config set --path="$WP_CORE_DIR" "WP_TESTS_DOMAIN" "example.org"
+			wp config set --path="$WP_CORE_DIR" "WP_TESTS_EMAIL" "admin@example.org"
+			wp config set --path="$WP_CORE_DIR" "WP_TESTS_TITLE" "Test Blog"
+			wp config set --path="$WP_CORE_DIR" "WP_PHP_BINARY" "php"
+			wp config set --path="$WP_CORE_DIR" "WPLANG" ""
+
+			wp config set --path="$WP_CORE_DIR" "WP_DEBUG" true --raw
+
+			# Remove the last 3 lines from the config file. The default config loads `wp-settings.php` but the tests config does not.
+			head -n -3 $WP_CORE_DIR/wp-config.php > tmp.php && mv tmp.php $WP_CORE_DIR/wp-config.php
+
+		else
+			echo "WordPress already installed, skipping download."
+		fi
+
+		# Download WP Tests library.
+		if [[ ! -d $WP_TESTS_DIR || 1 == $REINSTALL ]]; then
+
+			if [[ 1 == $REINSTALL ]]; then
+				rm -rf $WP_TESTS_DIR
+			fi
+
+			# Determines what branch to pull from.
+			TESTS_VERSION=$( parse_version_string $TESTS_VERSION )
+
+			mkdir -p $WP_TESTS_DIR
+
+			CWD=$(pwd)
+			cd $WP_TESTS_DIR
+
+			git init
+			git sparse-checkout init
+			git sparse-checkout set tests/phpunit/data tests/phpunit/includes
+			git remote add origin https://github.com/WordPress/wordpress-develop
+			git pull --depth=1 origin $TESTS_VERSION
+
+			mv tests/phpunit/data ./
+			mv tests/phpunit/includes ./
+
+			cd $CWD
+
+			# Move wp-config.php file into the expected location for the testing bootstrap.
+			mv $WP_CORE_DIR/wp-config.php $WP_TESTS_DIR/wp-tests-config.php
+
+		else
+			echo "Tests already installed, skipping download."
+
+		fi
+
+	fi
+
+else
+
+	echo "llms-tests: '$1' is not a valid command. See '$0 help' for usage information."
+
+fi
+
+
+
+
+exit
+
+
+
+
+
+
+
+# PHPUNIT_PATCH_DIR=$WP_TESTS_DIR/includes/phpunit7/MockObject
+# PHPUNIT_REAL_DIR="./vendor/phpunit/phpunit/src/Framework"
+
+
 
 # Usage: [VAR]=read_json [url] [key]
 function read_json {
@@ -31,8 +242,8 @@ function read_json {
 }
 
 function strindex {
-  x="${1%%$2*}"
-  [[ "$x" = "$1" ]] && echo -1 || echo "${#x}"
+	x="${1%%$2*}"
+	[[ "$x" = "$1" ]] && echo -1 || echo "${#x}"
 }
 
 # $1 = DB_Name
