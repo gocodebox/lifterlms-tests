@@ -2,6 +2,8 @@
 
 COMMAND=${1-help}
 
+WP_CLI_EXISTS=$( [[ -z "$( which wp )" ]] && echo 0 || echo 1 )
+
 TMPDIR=./tmp/tests
 TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
 
@@ -18,6 +20,29 @@ download() {
 		curl -s -L "$1" > "$2";
 	elif [ `which wget` ]; then
 		wget -nv -O "$2" "$1"
+	fi
+}
+
+
+# IF WP-CLI is not available on the path the phar will be downloaded and used by this script.
+if [[ 0 == $WP_CLI_EXISTS && ! -f "$TMPDIR/wp-cli.phar" ]]; then
+
+	echo ""
+	echo ""
+	echo "Warning: WP-CLI not found on your \$PATH, it will be downloaded to $TMPDIR/wp-cli.phar."
+	echo ""
+	echo ""
+
+	download https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar $TMPDIR/wp-cli.phar
+fi
+
+# Wrapper which uses `php wp-cli.phar` or `wp` depending on whether or not WP is installed on the users PATH.
+wpcli() {
+
+	if [[ 0 == $WP_CLI_EXISTS ]]; then
+		php $TMPDIR/wp-cli.phar "$@"
+	else
+		$( which wp ) "$@"
 	fi
 }
 
@@ -149,23 +174,24 @@ elif [ "install" == $COMMAND ]; then
 
 		# Download the WP Core files & setup the config file.
 		if [[ ! -d $WP_CORE_DIR || 1 == $REINSTALL ]]; then
-			wp core download --version="$WP_VERSION" --path="$WP_CORE_DIR" --force
+
+			wpcli core download --version="$WP_VERSION" --path="$WP_CORE_DIR" --force
 
 			# Create config file, mimicking this file: https://github.com/WordPress/wordpress-develop/blob/master/wp-tests-config-sample.php
-			wp config create --path="$WP_CORE_DIR" --dbname="$NAME" --dbuser="$USER" --dbpass="$PASS" --dbhost="$HOST" --force
+			wpcli config create --path="$WP_CORE_DIR" --dbname="$NAME" --dbuser="$USER" --dbpass="$PASS" --dbhost="$HOST" --force
 
 			# Hardcode the path because the file is going to move.
-			wp config set --path="$WP_CORE_DIR" "ABSPATH" "$WP_CORE_DIR"
+			wpcli config set --path="$WP_CORE_DIR" "ABSPATH" "$WP_CORE_DIR"
 
 			# Add custom data from the WP core test file.
-			wp config set --path="$WP_CORE_DIR" "FS_METHOD" "direct"
-			wp config set --path="$WP_CORE_DIR" "WP_TESTS_DOMAIN" "example.org"
-			wp config set --path="$WP_CORE_DIR" "WP_TESTS_EMAIL" "admin@example.org"
-			wp config set --path="$WP_CORE_DIR" "WP_TESTS_TITLE" "Test Blog"
-			wp config set --path="$WP_CORE_DIR" "WP_PHP_BINARY" "php"
-			wp config set --path="$WP_CORE_DIR" "WPLANG" ""
+			wpcli config set --path="$WP_CORE_DIR" "FS_METHOD" "direct"
+			wpcli config set --path="$WP_CORE_DIR" "WP_TESTS_DOMAIN" "example.org"
+			wpcli config set --path="$WP_CORE_DIR" "WP_TESTS_EMAIL" "admin@example.org"
+			wpcli config set --path="$WP_CORE_DIR" "WP_TESTS_TITLE" "Test Blog"
+			wpcli config set --path="$WP_CORE_DIR" "WP_PHP_BINARY" "php"
+			wpcli config set --path="$WP_CORE_DIR" "WPLANG" ""
 
-			wp config set --path="$WP_CORE_DIR" "WP_DEBUG" true --raw
+			wpcli config set --path="$WP_CORE_DIR" "WP_DEBUG" true --raw
 
 			# Remove the last 3 lines from the config file. The default config loads `wp-settings.php` but the tests config does not.
 			head -n -3 $WP_CORE_DIR/wp-config.php > tmp.php && mv tmp.php $WP_CORE_DIR/wp-config.php
