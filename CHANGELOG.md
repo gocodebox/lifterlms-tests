@@ -1,6 +1,14 @@
 LifterLMS Tests Changelog
 =========================
 
+v3.1.0 - 2021-10-04
+-------------------
+
++ Raise minimum supported PHP version to 7.3
++ Add support for phpunit 9.5
++ When running `llms-tests install`, the default value of `WP_TESTS_VERSION` is now set to `trunk`.
+
+
 v3.0.0 - 2021-09-27
 -------------------
 
