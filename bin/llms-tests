@@ -68,7 +68,7 @@ function run {
 		DB_HOST=${5:-localhost}
 		WP_VERSION=${6:-latest}
 		SKIP_DB_CREATE=${7:-false}
-		WP_TESTS_VERSION=${8:-false}
+		WP_TESTS_VERSION=${8:-trunk}
 
 		if [[ $WP_VERSION =~ ^[0-9]+\.[0-9]+\-(beta|RC)[0-9]+$ ]]; then
 			WP_BRANCH=${WP_VERSION%\-*}
