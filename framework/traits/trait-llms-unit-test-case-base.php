@@ -1,8 +1,9 @@
 <?php
 /**
  * Mock Request methods
+ *
  * @since 1.5.0
- * @version 1.14.0
+ * @version 3.2.0
  */
 
 include_once 'trait-llms-unit-test-mock-requests.php';
@@ -57,6 +58,31 @@ trait LLMS_Unit_Test_Case_Base {
 		$this->cookies = LLMS_Tests_Cookies::instance();
 		$this->factory = new LLMS_Unit_Test_Factory();
 		$this->logs    = new LLMS_Tests_Logs();
+
+	}
+
+	/**
+	 * Create an attachment post type from a given test asset file.
+	 *
+	 * The test asset file must exist in the test asset directory.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param string $filename Filename of a file in the
+	 * @return int WP_Post ID of the created attachment post.
+	 */
+	public function create_attachment( $filename ) {
+
+		$path = LLMS_Unit_Test_Files::get_asset_path( $filename );
+
+		// Fixes issue resulting from WP Core changes: https://github.com/gocodebox/lifterlms-groups/issues/137.
+		add_filter( 'wp_read_image_metadata_types', '__return_empty_array' );
+
+		$id = $this->factory->attachment->create_upload_object( $path );
+
+		remove_filter( 'wp_read_image_metadata_types', '__return_empty_array' );
+
+		return $id;
 
 	}
 

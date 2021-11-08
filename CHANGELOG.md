@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v3.2.0 - 2021-11-08
+-------------------
+
++ Add phpunit testcase method, `create_attachment()`, a wrapper around WP core's attachment upload factory method.
+
+
 v3.1.0 - 2021-10-04
 -------------------
 
