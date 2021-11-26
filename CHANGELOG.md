@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v3.2.1 - 2021-11-26
+-------------------
+
++ Output assertions found in `LLMS_Unit_Test_Assertions_Output` can call protected or private methods through `LLMS_Unit_Test_Util::call_method()`.
+
+
 v3.2.0 - 2021-11-08
 -------------------
 

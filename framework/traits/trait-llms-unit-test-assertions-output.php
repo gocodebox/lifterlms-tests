@@ -3,7 +3,7 @@
  * Assertions related to checking for WP_Error things.
  *
  * @since 1.3.0
- * @version [version]
+ * @version 3.2.1
  */
 trait LLMS_Unit_Test_Assertions_Output {
 
@@ -74,7 +74,7 @@ trait LLMS_Unit_Test_Assertions_Output {
 	 * Get the output of of a callable.
 	 *
 	 * @since 1.3.0
-	 * @since [version] Allow getting the ouput of private/protected methods.
+	 * @since 3.2.1 Allow getting the ouput of private/protected methods.
 	 *
 	 * @param callable $func Function to be called.
 	 * @param array    $args Parameters passed to $func as an indexed array.
