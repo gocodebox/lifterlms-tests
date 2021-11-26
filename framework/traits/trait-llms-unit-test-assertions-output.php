@@ -1,9 +1,9 @@
 <?php
 /**
- * Assertions related to checking for WP_Error things
+ * Assertions related to checking for WP_Error things.
  *
- * @since    1.3.0
- * @version  1.3.0
+ * @since 1.3.0
+ * @version [version]
  */
 trait LLMS_Unit_Test_Assertions_Output {
 
@@ -71,18 +71,27 @@ trait LLMS_Unit_Test_Assertions_Output {
 	}
 
 	/**
-	 * Get the output of of a callable
+	 * Get the output of of a callable.
 	 *
-	 * @param   callable  $func function to be called.
-	 * @param   array     $args parameters passed to $func as an indexed array.
-	 * @return  string
-	 * @since   1.3.0
-	 * @version 1.3.0
+	 * @since 1.3.0
+	 * @since [version] Allow getting the ouput of private/protected methods.
+	 *
+	 * @param callable $func Function to be called.
+	 * @param array    $args Parameters passed to $func as an indexed array.
+	 * @return string
 	 */
 	public function get_output( $func, $args = array() ) {
 
 		ob_start();
-		call_user_func_array( $func, $args );
+
+		// Is it a not accessible method?
+		if ( is_array( $func ) && ! is_callable( $func ) && LLMS_Unit_Test_Util::get_private_method( ...$func ) ) {
+			array_push( $func, $args );
+			LLMS_Unit_Test_Util::call_method( ...$func );
+		} else {
+			$func(...$args);
+		}
+
 		return ob_get_clean();
 
 	}
