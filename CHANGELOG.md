@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v3.3.0 - 2021-12-13
+-------------------
+
++ Added `LLMS_Unit_Test_API_Integrations` a trait with utilities intended for use with external API integration tests.
+
+
 v3.2.1 - 2021-11-26
 -------------------
 

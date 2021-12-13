@@ -3,7 +3,7 @@
  * Mock Request methods
  *
  * @since 1.5.0
- * @version 3.2.0
+ * @version 3.3.0
  */
 
 include_once 'trait-llms-unit-test-mock-requests.php';
@@ -12,14 +12,16 @@ include_once 'trait-llms-unit-test-mock-requests.php';
  * LLMS_Unit_Test_Case_Base trait.
  *
  * @since 1.5.0
- * @since 1.7.0 Add `$cookies` property providing access to the instance of `LLMS_Tests_Cookies` class.
- * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
- * @since 1.8.0 Added asset assertions.
+ * @since 1.7.0  Add `$cookies` property providing access to the instance of `LLMS_Tests_Cookies` class.
+ * @since 1.7.2  Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
+ * @since 1.8.0  Added asset assertions.
  * @since 1.14.0 Added logs.
+ * @since 3.3.0  Added `LLMS_Unit_Test_API_Integrations` trait.
  */
 trait LLMS_Unit_Test_Case_Base {
 
 	use LLMS_Unit_Test_Mock_Http;
+	use LLMS_Unit_Test_API_Integrations;
 	use LLMS_Unit_Test_Assertions_String;
 	use LLMS_Unit_Test_Assertions_Notices;
 	use LLMS_Unit_Test_Assertions_Assets;
@@ -46,15 +48,16 @@ trait LLMS_Unit_Test_Case_Base {
 	 * Setup the test case.
 	 *
 	 * @since 1.6.0
-	 * @since 1.7.0 Initailize the `$cookies` property.
+	 * @since 1.7.0  Initailize the `$cookies` property.
 	 * @since 1.14.0 Add access to logs class.
-	 * @since 3.0.0 Renamed from `setUp()` for WP core compat.
+	 * @since 3.0.0  Renamed from `setUp()` for WP core compat.
 	 *
 	 * @return void
 	 */
 	public function set_up() {
 
 		parent::set_up();
+
 		$this->cookies = LLMS_Tests_Cookies::instance();
 		$this->factory = new LLMS_Unit_Test_Factory();
 		$this->logs    = new LLMS_Tests_Logs();
