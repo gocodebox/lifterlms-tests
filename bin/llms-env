@@ -13,7 +13,6 @@ COMPOSE_OVERRIDE="./docker-compose.yml"
 FILE_OPT="-f $COMPOSE_MAIN";
 [ -f "$COMPOSE_OVERRIDE" ] && FILE_OPT="-f $COMPOSE_OVERRIDE $FILE_OPT"
 
-
 DOCKER_CMD="docker-compose --env-file $ENV_FILE $FILE_OPT"
 
 HELP_OPTIONS_HELP=$'-h, --help\n      Display this help message'
@@ -247,7 +246,13 @@ elif [ "wp" == $COMMAND ]; then
 	if [[ "-h" == $2 || "--help" == $2 ]]; then
 		output_help "wp" "$0 wp [-h | --help] <command...> [options...]" "Executes a wp-cli command inside the PHP service container" "$HELP_OPTIONS_HELP"
 	else
-		docker exec $($DOCKER_CMD ps -q wordpress) wp --allow-root ${*:2}
+
+		ARGS=""
+		for arg in "${@:2}"; do
+			ARGS="$ARGS "$arg""
+		done
+		docker exec $($DOCKER_CMD ps -q wordpress) bash -c "wp --allow-root $ARGS"
+
 	fi
 
 else
@@ -255,4 +260,3 @@ else
 	echo "llms-env: '$1' is not a valid command. See '$0 --help' for usage information.";
 
 fi;
-
