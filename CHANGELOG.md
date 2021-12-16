@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v3.3.1 - 2021-12-16
+-------------------
+
++ Fixed issues encountered when passing command arguments containing quotes into the `wp` command.
+
+
 v3.3.0 - 2021-12-13
 -------------------
 
