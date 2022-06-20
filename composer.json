@@ -29,5 +29,10 @@
     "llms": {
       "version": "3.2.0"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }
