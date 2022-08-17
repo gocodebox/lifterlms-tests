@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v3.3.2 - 2022-08-17
+-------------------
+
++ Improve compatibility with packages that don't explicitly require the LifterLMS core plugin.
+
+
 v3.3.1 - 2021-12-16
 -------------------
 
