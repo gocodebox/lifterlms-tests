@@ -3,7 +3,7 @@
  * Mock Request methods
  *
  * @since 1.5.0
- * @version 3.3.0
+ * @version 3.3.2
  */
 
 include_once 'trait-llms-unit-test-mock-requests.php';
@@ -161,6 +161,7 @@ trait LLMS_Unit_Test_Case_Base {
 	 * @since 1.7.2 Clear LifterLMS notices and reset `$_SERVER['REQUEST_URI']` global.
 	 * @since 1.14.0 Clear logs.
 	 * @since 3.0.0 Renamed from `tearDown()` for WP core compat.
+	 * @since 3.3.2 Clear notices only when the function exists.
 	 *
 	 * @return void
 	 */
@@ -177,8 +178,10 @@ trait LLMS_Unit_Test_Case_Base {
 		// Reset the expected cookie setter response.
 		$this->cookies->expect_success();
 
-		// Clear all LifterLMS notices.
-		llms_clear_notices();
+		if ( function_exists( 'llms_clear_notices' ) ) {
+			// Clear all LifterLMS notices.
+			llms_clear_notices();
+		}
 
 		// Clearing REQUEST_URI is necessary after running tests that utilize $this->go_to().
 		$_SERVER['REQUEST_URI'] = '';
