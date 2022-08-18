@@ -130,6 +130,45 @@ Add mock `$_GET` data via `$this->mockGetRequest( array( 'var' => 'value' ) );`
 
 Add mock `$_POST` data via `$this->mockPostRequest( array( 'var' => 'value' ) );`
 
+
+##### Mock HTTP request made via `wp_remote_request()`.
+
+Before calling `wp_remote_request()` run `$this->mock_http_request( $url, $data, $fuzzy_match )` to setup the desired return of the next `wp_remote_request()`.
+
+When `wp_remote_request()` is run, the mocker will check to see if a mock has been added for the URL, if found, it will short-circuit the HTTP request and return early (before any remote connection is made), returning the value of `$data`. Once the mock is found and returned, it will be removed from the mocker's data. If you wish to mock several consecutive URLs you can call `mock_http_request()` multiple times. The matcher will always return the *first* match. So if you wish to mock the same URL more than once, make sure setup the mocks in the order you expect them to be returned.
+
+You can specify a full or partial URL as the `$url` parameter. If a specifying a partial URL, use `$fuzzy_match = true` to match the URL part.
+
+```php
+
+public function test_mock_https_request() {
+
+  // Mocks a WP REST post creation request.
+  $this->mock_http_request( '/wp-json/wp/v2/posts',
+    [ 
+      'body'     => '{"id":123,"title":"Mock Title",...}',
+      'response' => [
+        'code' => 201,
+      ],
+    ], 
+    true
+  );
+
+  $res = wp_remote_post( 
+    rest_url( '/wp-json/wp/v2/posts' ),
+    [
+      'body' => [
+        'title' => 'Mock Title',
+      ],
+    ],
+  );
+
+  $this->assertEquals( 201, wp_remote_retrieve_response_code( $res ) );
+  $this->assertEquals( 123, json_decode( wp_remote_retrieve_response_body( $res ) )['id'] );
+
+}
+
+
 ##### Utility Methods
 
 + Get the output of a function: `$output = $this->get_output( $callable, $args_array );`

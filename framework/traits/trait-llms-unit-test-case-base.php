@@ -3,7 +3,7 @@
  * Mock Request methods
  *
  * @since 1.5.0
- * @version 3.3.2
+ * @version 4.0.0
  */
 
 include_once 'trait-llms-unit-test-mock-requests.php';
@@ -51,10 +51,13 @@ trait LLMS_Unit_Test_Case_Base {
 	 * @since 1.7.0  Initailize the `$cookies` property.
 	 * @since 1.14.0 Add access to logs class.
 	 * @since 3.0.0  Renamed from `setUp()` for WP core compat.
+	 * @since 4.0.0 Automatically skips qualifying API integration tests.
 	 *
 	 * @return void
 	 */
 	public function set_up() {
+
+		$this->skip_api_integration_test();
 
 		parent::set_up();
 
