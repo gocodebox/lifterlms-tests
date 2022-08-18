@@ -1,6 +1,14 @@
 LifterLMS Tests Changelog
 =========================
 
+v4.0.0 - 2022-08-18
+-------------------
+
++ Automatically skips API integration tests in `LLMS_Unit_Test_Case_Base::set_up()`.
++ Added the ability to mock multiple consecutive HTTP requests via `LLMS_Unit_Test_Mock_Http::mock_http_request()`.
++ **[BREAKING]** Removed protected class members: `LLMS_Unit_Test_Mock_Http::$_url_to_mock`, `LLMS_Unit_Test_Mock_Http::$_mock_return`, and `LLMS_Unit_Test_Mock_Http::$_fuzzy_match`.
+
+
 v3.3.2 - 2022-08-17
 -------------------
 
