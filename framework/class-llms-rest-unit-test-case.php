@@ -60,21 +60,26 @@ class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 	 * Preform a mock WP_REST_Request
 	 *
 	 * @since Unknown
+	 * @since 4.1.0 Added `$headers` parameter.
 	 *
-	 * @param string $method Request method.
-	 * @param string $route  Request route, eg: '/llms/v1/courses'.
-	 * @param array  $body   Optional request body.
-	 * @param array  $query  Optional query arguments.
+	 * @param string $method  Request method.
+	 * @param string $route   Request route, eg: '/llms/v1/courses'.
+	 * @param array  $body    Optional request body.
+	 * @param array  $query   Optional query arguments.
+	 * @param array  $headers Optional header arguments.
 	 * @return WP_REST_Response.
 	 */
-	protected function perform_mock_request( $method, $route, $body = array(), $query = array() ) {
+	protected function perform_mock_request( $method, $route, $body = array(), $query = array(), $headers = array() ) {
 
 		$request = new WP_REST_Request( $method, $route );
 		if ( $body ) {
 			$request->set_body_params( $body );
 		}
-		if( $query ) {
+		if ( $query ) {
 			$request->set_query_params( $query );
+		}
+		if ( $headers ) {
+			$request->set_headers( $headers );
 		}
 		return $this->server->dispatch( $request );
 

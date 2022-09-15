@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v4.1.0 - 2022-09-15
+-------------------
+
++ Added optional `$headers` parameter to `LLMS_REST_Unit_Test_Case::perform_mock_request()`.
+
+
 v4.0.0 - 2022-08-18
 -------------------
 
