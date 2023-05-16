@@ -13,8 +13,8 @@
     "php": "^7.3 || ^8.0",
     "phpunit/phpunit": "^7.5 || ^9.5",
     "yoast/phpunit-polyfills": "^1.0",
-    "wp-cli/wp-cli-tests": "^3.0.15",
-    "wp-cli/extension-command": "^2.1.0"
+    "wp-cli/wp-cli-tests": "^3.2.6",
+    "wp-cli/extension-command": "^2.1.13"
   },
   "bin": [
     "bin/llms-tests",
