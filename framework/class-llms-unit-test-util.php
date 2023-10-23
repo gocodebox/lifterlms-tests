@@ -1,7 +1,18 @@
 <?php
 /**
  * Testing Utilities
+ *
+ * @since Unknown.
+ * @version [version]
  */
+
+/**
+ * Testing Utilities class.
+ *
+ * @since Unknown.
+ * @since [version] Allow dynamic properties.
+ */
+#[AllowDynamicProperties]
 class LLMS_Unit_Test_Util {
 
 	/**

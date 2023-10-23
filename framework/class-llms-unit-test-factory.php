@@ -1,7 +1,19 @@
 <?php
 /**
- * Factory for making LifterLMS data.
+ * Factory for making LifterLMS data
+ *
+ * @since Unknown.
+ * @version [version]
  */
+
+/**
+ * Factory for making LifterLMS data class.
+ *
+ * @since Unknown.
+ * @since [version] Allow dynamic properties.
+ * @version [version]
+ */
+#[AllowDynamicProperties]
 class LLMS_Unit_Test_Factory extends WP_UnitTest_Factory {
 
 	/**

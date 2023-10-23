@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v4.1.1 - 2023-10-23
+-------------------
+
++ Allow PHP dynamic properties for all the test classes.
+
+
 v4.1.0 - 2022-09-15
 -------------------
 

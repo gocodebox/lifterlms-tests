@@ -3,7 +3,7 @@
  * Log handler to expose logs to test cases
  *
  * @since 1.14.0
- * @version 1.14.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,7 +12,9 @@ defined( 'ABSPATH' ) || exit;
  * LLMS_Tests_Logs class.
  *
  * @since 1.14.0
+ * @since [version] Allow dynamic properties.
  */
+#[AllowDynamicProperties]
 class LLMS_Tests_Logs {
 
 	/**
