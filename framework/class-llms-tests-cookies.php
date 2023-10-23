@@ -3,7 +3,7 @@
  * Get/Set mock cookie data set by `llms_setcookie()`.
  *
  * @since 1.7.0
- * @version 1.7.2
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,9 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.7.0
  * @since 1.7.1 Also set the cookie in the $_COOKIE superglobal.
  * @since 1.7.2 Unset global $_COOKIE when performing an unset.
+ * @since [version] Allow dynamic properties.
  */
+#[AllowDynamicProperties]
 class LLMS_Tests_Cookies {
 
 	/**

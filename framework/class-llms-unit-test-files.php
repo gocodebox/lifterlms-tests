@@ -2,8 +2,17 @@
 /**
  * File management
  *
- * @since Unknown
+ * @since Unknown.
+ * @version [version]
  */
+
+/**
+ * File management class.
+ *
+ * @since Unknown
+ * @since [version] Allow dynamic properties.
+ */
+#[AllowDynamicProperties]
 class LLMS_Unit_Test_Files {
 
 	/**

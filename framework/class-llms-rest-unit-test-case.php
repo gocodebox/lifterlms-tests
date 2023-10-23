@@ -1,9 +1,18 @@
 <?php
 /**
- * Base test case for all tests
+* Base test case for all the REST tests
+ *
+ * @since Unknown.
+ * @version [version]
+ */
+
+/**
+ * Base test case for all the REST tests class.
  *
  * @since Unknown
+ * @since [version] Allow dynamic properties.
  */
+#[AllowDynamicProperties]
 class LLMS_REST_Unit_Test_Case extends WP_UnitTestCase {
 
 	use LLMS_Unit_Test_Case_Base {
