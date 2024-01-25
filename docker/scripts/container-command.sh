@@ -24,7 +24,7 @@ fi
 which netcat && echo "Already installed: skipping apt dependency installation."
 if ! $( which netcat ); then
 	apt update
-	apt -y install netcat mariadb-client
+	apt -y install netcat-traditional mariadb-client
 fi
 
 # Ensure DB is ready before proceeding.
