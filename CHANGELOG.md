@@ -1,6 +1,12 @@
 LifterLMS Tests Changelog
 =========================
 
+v4.2 - 2024-01-25
+-------------------
+
++ Changing container build command to use newer package for `netcat`
+
+
 v4.1.1 - 2023-10-23
 -------------------
 
