@@ -1,6 +1,11 @@
 LifterLMS Tests Changelog
 =========================
 
+v4.3 - 2024-04-05
+-------------------
+
++ Upgrading to latest version of WPCS.
+
 v4.2 - 2024-01-25
 -------------------
 
