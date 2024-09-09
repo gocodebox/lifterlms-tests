@@ -1,6 +1,11 @@
 LifterLMS Tests Changelog
 =========================
 
+v4.4 - 2024-09-09
+-------------------
+
++ Fixing E2E tests docker compose command.
+
 v4.3 - 2024-04-05
 -------------------
 
