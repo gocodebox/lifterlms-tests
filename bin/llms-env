@@ -13,7 +13,7 @@ COMPOSE_OVERRIDE="./docker-compose.yml"
 FILE_OPT="-f $COMPOSE_MAIN";
 [ -f "$COMPOSE_OVERRIDE" ] && FILE_OPT="-f $COMPOSE_OVERRIDE $FILE_OPT"
 
-DOCKER_CMD="docker-compose --env-file $ENV_FILE $FILE_OPT"
+DOCKER_CMD="docker compose --env-file $ENV_FILE $FILE_OPT"
 
 HELP_OPTIONS_HELP=$'-h, --help\n      Display this help message'
 
