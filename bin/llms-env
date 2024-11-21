@@ -238,6 +238,10 @@ elif [ "version" == $COMMAND ]; then
 		$0 wp core update-db
 		INSTALLED=$( $0 wp core version )
 		echo Version changed to: $INSTALLED
+		echo Setting debug mode
+		$0 wp config set --raw WP_DEBUG true
+        $0 wp config set --raw WP_DEBUG_LOG true
+        $0 wp config set --raw WP_DEBUG_DISPLAY true
 
 	fi
 
