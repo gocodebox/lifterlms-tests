@@ -234,12 +234,12 @@ elif [ "version" == $COMMAND ]; then
 			DOWNLOAD=$( node -e "var list = JSON.parse( '$LIST' ).offers; console.log( list[ list.length - 1 ].download );" )
 		fi
 
-		wp theme install twentytwentyfour --activate
 		$0 wp core update $DOWNLOAD --force
 		$0 wp core update-db
 		INSTALLED=$( $0 wp core version )
 		echo Version changed to: $INSTALLED
-		echo Setting debug mode
+		echo Setting default theme
+		$0 wp theme install twentytwentyfour --activate
 
 	fi
 
