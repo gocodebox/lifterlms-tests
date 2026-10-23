@@ -149,7 +149,9 @@ class FeatureContext extends WP_CLI_FeatureContext {
 		foreach ( $props as $key => &$val ) {
 
 			$prop = $reflector->getProperty( $key );
-			$prop->setAccessible( true );
+			if ( PHP_VERSION_ID < 80100 ) {
+				$prop->setAccessible( true );
+			}
 
 			if ( 'env' === $key ) {
 				$prop->setValue( $proc, array_merge( $prop->getValue( $proc ), $env ) );
