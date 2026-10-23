@@ -69,7 +69,9 @@ class LLMS_Unit_Test_Util {
 
 		$class = self::get_class( $obj );
 		$method = $class->getMethod( $name );
-		$method->setAccessible( true );
+		if ( PHP_VERSION_ID < 80100 ) {
+			$method->setAccessible( true );
+		}
 		return $method;
 
 	}
@@ -101,7 +103,9 @@ class LLMS_Unit_Test_Util {
 	public static function get_private_property_value( $obj, $name ) {
 
 		$prop = self::get_private_property( $obj, $name );
-		$prop->setAccessible( true );
+		if ( PHP_VERSION_ID < 80100 ) {
+			$prop->setAccessible( true );
+		}
 		return $prop->isStatic() ? $prop->getValue() : $prop->getValue( $obj );
 
 	}
@@ -115,7 +119,9 @@ class LLMS_Unit_Test_Util {
 	public static function set_private_property( $obj, $name, $val ) {
 
 		$prop = self::get_private_property( $obj, $name );
-		$prop->setAccessible( true );
+		if ( PHP_VERSION_ID < 80100 ) {
+			$prop->setAccessible( true );
+		}
 		$prop->setValue( $obj, $val );
 
 	}
