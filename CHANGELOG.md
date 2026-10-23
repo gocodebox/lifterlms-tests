@@ -1,7 +1,7 @@
 LifterLMS Tests Changelog
 =========================
 
-trunk
+v4.5 - 2026-10-23
 -------------------
 
 + Fix PHP 8.5 deprecation warnings caused by `ReflectionMethod::setAccessible()` and `ReflectionProperty::setAccessible()` calls in the testing utilities. These methods are no-ops since PHP 8.1 and deprecated as of PHP 8.5, so they're now only invoked on PHP versions older than 8.1.
