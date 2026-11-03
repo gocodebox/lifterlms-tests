@@ -22,7 +22,7 @@ class LLMS_Unit_Test_Exception_Redirect extends LLMS_Unit_Test_Exception_Exit {
 	 * @param Exception|null $prev The previous exception used for the exception chaining.
 	 * @param bool $safe Determines Whether or not the redirect function used is "safe" or regular.
 	 */
-	public function __construct( $location = '', $code = 0, Exception $prev = null, $safe = false ) {
+	public function __construct( $location = '', $code = 0, ?Exception $prev = null, $safe = false ) {
 		$this->safe = $safe;
 		parent::__construct( $location, $code, $prev );
 		$this->message = sprintf( '%1$s [%2$d] %3$s', $this->message, $this->code, $this->getSafe() ? 'YES' : 'NO' );
