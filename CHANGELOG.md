@@ -1,6 +1,11 @@
 LifterLMS Tests Changelog
 =========================
 
+v4.5.1 - 2026-11-03
+-------------------
+
++ Fix PHP 8.4+ deprecation warning caused by the implicitly nullable `$prev` parameter of `LLMS_Unit_Test_Exception_Redirect::__construct()`. The parameter is now explicitly nullable.
+
 v4.5 - 2026-10-23
 -------------------
 
